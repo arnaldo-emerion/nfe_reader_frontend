@@ -1,0 +1,175 @@
+<div class="main-content {{ marginTopClass }}">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger row" *ngIf="showHeader">
+            <div class="form-group col-md-6">
+              <h4 class="card-title">{{ headerTitle }}</h4>
+            </div>
+            <div
+              class="form-group col-md-6 d-flex flex-row-reverse"
+              *ngIf="showAddButtom"
+            >
+              <button
+                mat-button
+                class="btn btn-info btn-fill"
+                style="margin-right: 1%"
+                (click)="propagate('add-new', '')"
+              >
+                Adicionar Registro
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <ng-content select="[slot=aboveFilter]"></ng-content>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showFilter">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input
+                    (keyup)="applyFilter($event)"
+                    placeholder="Filtre utilizando qualquer campo"
+                    class="form-control"
+                    style="padding: 0px 10px 0px 10px; border-radius: 5px"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showFilter">
+              <div class="col-md-12">
+                <ng-content select="[slot=filter]"></ng-content>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table
+                mat-table
+                matSort
+                [dataSource]="datasource"
+                class="mat-elevation-z2 col-md-12"
+              >
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox
+                      (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                    >
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox
+                      (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                    >
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+
+                <ng-container
+                  [matColumnDef]="col.el"
+                  *ngFor="let col of displayedColumns"
+                >
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{ col.head }}
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    style="padding-left: 7px"
+                  >
+                    <div *ngIf="!col.botoes; else icones">
+                      {{ element[col.el] | pipeFormacaoColuna: col.format }}
+                    </div>
+                    <ng-template #icones>
+                      <div *ngIf="!col.tipo || col.tipo != 'botao'">
+                        <img
+                          *ngFor="let acao of col.botoes"
+                          (click)="propagate(acao.acao, element)"
+                          [src]="'/assets/img/' + acao.icone"
+                          [alt]="acao.title"
+                          [title]="acao.title"
+                          width="25px"
+                          style="margin-left: 3%"
+                          [style.display]="
+                            evaluateExpression(element, acao.expression)
+                              ? ''
+                              : 'none'
+                          "
+                        />
+                      </div>
+                      <div *ngIf="col.tipo && col.tipo == 'botao'">
+                        <button
+                          *ngFor="let acao of col.botoes"
+                          mat-button
+                          [ngClass]="'btn btn-fill ' + acao.classe"
+                          style="margin-right: 1%"
+                          (click)="propagate(acao.acao, element)"
+                        >
+                          {{ acao.titulo }}
+                        </button>
+                      </div>
+                    </ng-template>
+                  </td>
+                </ng-container>
+
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="cols"
+                  style="background-color: #6fbce0a3"
+                ></tr>
+
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: cols"
+                  [ngClass]="
+                    'linha-coluna ' + row[this.displayedColumns[0].clazz]
+                  "
+                  [class.highlight]="
+                    showSelect &&
+                    selectedRowIndex == row[this.displayedColumns[0].el]
+                  "
+                  [class.skip]="row[this.displayedColumns[0].clazz]"
+                  (click)="highlight(row)"
+                ></tr>
+              </table>
+
+              <div>
+                <mat-paginator
+                  [pageSizeOptions]="pageSizeOptions"
+                  showFirstLastButtons
+                  style="float: inline-end"
+                ></mat-paginator>
+
+                <div class="action-panel">
+                  <div class="actions">
+                    <div class="text">Ações Disponíveis</div>
+                    <div class="icone">
+                      <img
+                        [src]="'/assets/img/excel.svg'"
+                        alt="Exportar para Excel"
+                        title="Exportar para Excel os registros selecionados"
+                        class="img-centered"
+                        (click)="exportArrayToExcel()"
+                      />
+                    </div>
+                    <ng-content select="[slot=available-actions]"> </ng-content>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <form *ngIf="dadosTransporte">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Razão Social</label>
+              <input
+                class="form-control"
+                [value]="dadosTransporte.razaoSocial"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>CNPJ</label>
+              <input
+                class="form-control"
+                [value]="
+                  dadosTransporte.cnpj
+                    | pipeFormacaoColuna: { tipo: 'PIPE', pipe: 'CNPJ' }
+                "
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>IE</label>
+              <input class="form-control" [value]="dadosTransporte.ie" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7">
+            <div class="form-group">
+              <label>Endereço Completo</label>
+              <input class="form-control" [value]="dadosTransporte.endereco" />
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Municipio</label>
+              <input class="form-control" [value]="dadosTransporte.municipio" />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>UF</label>
+              <input class="form-control" [value]="dadosTransporte.uf" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Razão Social</label>
+              <input class="form-control" [value]="dadosDest.razaoSocial" />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>CNPJ</label>
+              <input
+                class="form-control"
+                [value]="
+                  dadosDest.cnpj
+                    | pipeFormacaoColuna: { tipo: 'PIPE', pipe: 'CNPJ' }
+                "
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>IE</label>
+              <input class="form-control" [value]="dadosDest.ie" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Endereço</label>
+              <input class="form-control" [value]="dadosDest.logradouro" />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Bairro</label>
+              <input class="form-control" [value]="dadosDest.bairro" />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>CEP</label>
+              <input
+                class="form-control"
+                [value]="dadosDest.cep | pipeFormacaoColuna: { tipo: 'CEP' }"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Municipio</label>
+              <input class="form-control" [value]="dadosDest.municipio" />
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="form-group">
+              <label>UF</label>
+              <input class="form-control" [value]="dadosDest.uf" />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Pais</label>
+              <input
+                class="form-control"
+                value="{{ dadosDest.cpais }} - {{ dadosDest.xpais }}"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Telefone</label>
+              <input
+                class="form-control"
+                [value]="
+                  dadosDest.telefone | pipeFormacaoColuna: { tipo: 'TELEFONE' }
+                "
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Indicador IE</label>
+              <input class="form-control" [value]="dadosDest.indIEDest" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

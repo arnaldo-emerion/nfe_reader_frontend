@@ -1,0 +1,17 @@
+.action-panel {
+  display: inline-flex;
+}
+
+.actions {
+  display: inline-flex;
+}
+
+.actions .text {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.icone img {
+  max-height: 30px;
+  cursor: pointer;
+}

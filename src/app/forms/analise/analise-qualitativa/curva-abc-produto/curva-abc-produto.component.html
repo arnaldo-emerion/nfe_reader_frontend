@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h5 class="card-title"></h5>
+
+            <div>
+              <div class="">
+                <div
+                  class="d-flex flex-row-reverse col-md-6"
+                  style="float: right"
+                >
+                  <mat-button-toggle-group
+                    name="tipoCurvaABC"
+                    aria-label="Tipo Curva ABC"
+                    style="border: 1px solid"
+                  >
+                    <mat-button-toggle
+                      [checked]="checkedButton == volume.value"
+                      value="volume"
+                      #volume
+                      (click)="toggleTipoCurvaABC(volume)"
+                      >Volume</mat-button-toggle
+                    >
+
+                    <mat-button-toggle
+                      [checked]="checkedButton == valorTotal.value"
+                      value="faturamento"
+                      #valorTotal
+                      (click)="toggleTipoCurvaABC(valorTotal)"
+                      >Faturamento</mat-button-toggle
+                    >
+                    <mat-button-toggle
+                      [checked]="checkedButton == frequencia.value"
+                      value="frequencia"
+                      #frequencia
+                      (click)="toggleTipoCurvaABC(frequencia)"
+                      >Frequência</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                  <label class="tipo-curva-abc-label">Tipo de Curva ABC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="curva-abc-produto" height="140vh"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.chart-legend {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.tipo-curva-abc-label {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 3%;
+}
+
+.form-control {
+  width: auto;
+  display: inline-block;
+}
+
+.filter-data {
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+app-tabela-pagination {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+app-tabela-pagination th,
+td {
+  padding: 15px;
+}

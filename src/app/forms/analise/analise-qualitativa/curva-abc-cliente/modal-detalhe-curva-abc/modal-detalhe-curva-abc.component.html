@@ -1,0 +1,126 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" *ngIf="clienteInfo$ | async as info">
+          <div class="card-header card-header-danger">
+            <h4 class="title">({{ info.cpfCnpj }}) - {{ info.razaoSocial }}</h4>
+            <p class="card-category"></p>
+          </div>
+          <div class="card-body">
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Menor Compra</label>
+              </div>
+              <div class="col-md-5">
+                {{ info.menorCompra | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Maior Compra</label>
+              </div>
+              <div class="col-md-5">
+                {{ info.maiorCompra | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Quantidade de Pedidos</label>
+              </div>
+              <div class="col-md-5">{{ info.totalPedidos }}</div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Valor total de Pedidos</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.valorTotalCompras | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Valor Médio por Pedido</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.valorMedioPedido | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Quantidade Média de Itens por Pedido</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.quantidadeMediaItensPorPedido | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Data da última compra</label>
+              </div>
+              <div class="col-md-5">
+                {{ getDataFormatada(info.dataUltimaCompra) }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Participação deste Cliente (%)</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.participacaoCliente | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Posição no Ranking de Faturamento</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.rankingFaturamento }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Posição no Ranking de Qtd de Pedidos</label
+                >
+              </div>
+              <div class="col-md-5">
+                {{ info.rankingQtdPedidos }}
+              </div>
+            </div>
+
+            <div class="row mt-3 d-flex flex-row-reverse">
+              <div class="col-md-3">
+                <button
+                  class="btn btn-danger btn-fill col-md-12"
+                  (click)="closeDialog()"
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

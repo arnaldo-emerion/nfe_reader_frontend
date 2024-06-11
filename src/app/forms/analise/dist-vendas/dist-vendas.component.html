@@ -1,0 +1,106 @@
+<div class="main-content" style="min-height: 0px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div
+              style="width: 100%; display: inline-flex; align-items: baseline"
+            >
+              <label style="margin-right: 1%">De</label>
+              <input
+                class="form-control filter-data"
+                [matDatepicker]="dataInicial"
+                matInput
+                dateMask
+              />
+              <mat-datepicker #dataInicial></mat-datepicker>
+
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dataInicial"
+              ></mat-datepicker-toggle>
+
+              <label style="margin-left: 1%; margin-right: 1%"> até </label>
+
+              <input
+                class="form-control filter-data"
+                [matDatepicker]="dataFinal"
+                dateMask
+              />
+              <mat-datepicker #dataFinal></mat-datepicker>
+
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dataFinal"
+              ></mat-datepicker-toggle>
+
+              <label style="margin-left: 1%; margin-right: 1%"> Estado </label>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="standard">
+                  <mat-label>UF</mat-label>
+                  <mat-select #estado>
+                    <mat-option [value]="'TODOS'"> Todos </mat-option>
+                    <mat-option
+                      *ngFor="let estado of estados"
+                      [value]="estado.sigla"
+                    >
+                      {{ estado.nome }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div>
+                <button
+                  class="btn btn-success"
+                  (click)="filtarRegistros(dataInicial, dataFinal, estado)"
+                >
+                  Aplicar Filtro
+                </button>
+
+                <button
+                  class="btn btn-success ml-1"
+                  style="position: absolute; right: 3%"
+                  (click)="limparSelecao(dataInicial, dataFinal)"
+                >
+                  Limpar Filtro
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-tabela
+  *ngIf="data$ | async as data"
+  [displayedColumns]="displayedColumns"
+  [dados]="data"
+  [showHeader]="false"
+  [headerTitle]="'Distribuição de Vendas'"
+  (selectedRow)="onRowSelect($event)"
+  [showAddButtom]="false"
+  (acaoSelecionada)="executarAcao($event)"
+  (filteredResults)="filteredResults($event)"
+  [marginTopClass]="'no-top-margin'"
+>
+  <div class="form-group" slot="filter" style="margin-top: 0px">
+    <div class="row">
+      <div class="col-md-2 negrito">Quantidade de notas Fiscais:</div>
+      <div class="col-md-1">{{ qtdNotas }}</div>
+
+      <div class="col-md-2 negrito">Quantidade de Clientes:</div>
+      <div class="col-md-1">{{ qtdClientes }}</div>
+
+      <div class="col-md-2 negrito">Quantidade de Estados:</div>
+      <div class="col-md-1">{{ qtdEstados }}</div>
+
+      <div class="col-md-2 negrito">Valor Total Vendido:</div>
+      <div class="col-md-1">{{ totalNF | number: "1.2-2" }}</div>
+    </div>
+  </div>
+</app-tabela>

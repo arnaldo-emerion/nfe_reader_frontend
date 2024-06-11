@@ -1,0 +1,454 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Nota Fiscal: {{ infoNFe }}</h4>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  (click)="voltar()"
+                  class="btn btn-info btn-fill col-md-12"
+                >
+                  Voltar
+                </button>
+
+                <button
+                  (click)="downloadArquivo()"
+                  class="btn btn-success btn-fill col-md-12"
+                >
+                  Download Arquivo
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <mat-tab-group animationDuration="0ms" [selectedIndex]="0">
+              <mat-tab label="NFe">
+                <div class="card">
+                  <div class="content">
+                    <mat-accordion [multi]="true">
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Dados da NFe </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form [formGroup]="formulario" #formAtividade="ngForm">
+                          <div class="row">
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>ID</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="id"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Nat. da Operação</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="natOp"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>Tipo</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="tpNF"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <label>Chave de Acesso</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="chaveNFe"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>Num NFe</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="nNF"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Data NFe</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="dhEmi"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Total dos Produtos</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="vprod"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Total de IPI</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="vipi"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Total de ICMS</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="vicms"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Valor da Nota</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="vnf"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Emitente </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <form
+                          [formGroup]="formularioEmitente"
+                          #formEmitente="ngForm"
+                        >
+                          <div class="row">
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>CNPJ</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="cnpj"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>IE</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="ie"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <label>Razão Social</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="razaoSocial"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Município</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="municipio"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>UF</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="uf"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Destinatário </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form
+                          [formGroup]="formularioDestinatario"
+                          #formEmitente="ngForm"
+                        >
+                          <div class="row">
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>CNPJ</label>
+                                <input
+                                  (click)="goToClienteDetail()"
+                                  readonly
+                                  class="form-control clickme"
+                                  formControlName="cnpj"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>IE</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="ie"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                <label>Razão Social</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="razaoSocial"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Município</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="municipio"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>UF</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="uf"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Emitente">
+                <app-nfe-emitente
+                  *ngIf="dadosEmit"
+                  [dadosEmit]="dadosEmit"
+                ></app-nfe-emitente>
+              </mat-tab>
+              <mat-tab label="Destinatário">
+                <app-nfe-destinatario
+                  *ngIf="dadosDest"
+                  [dadosDest]="dadosDest"
+                ></app-nfe-destinatario>
+              </mat-tab>
+
+              <mat-tab label="Produtos e Serviços">
+                <div class="card">
+                  <div class="header">
+                    <div class="example-action-buttons">
+                      <button mat-button (click)="accordion.openAll()">
+                        Exibir todos
+                      </button>
+                      <button mat-button (click)="accordion.closeAll()">
+                        Fechar Todos
+                      </button>
+                    </div>
+                  </div>
+                  <div class="content">
+                    <mat-accordion [multi]="true" #accordion="matAccordion">
+                      <mat-expansion-panel
+                        [expanded]="i == 0"
+                        *ngFor="let item of itemList; index as i"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            ({{ item.nitem }}) {{ item.produto.descricao }}
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label>Código</label>
+                              <input
+                                class="form-control"
+                                [value]="item.produto.codigo"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Descrição</label>
+                              <input
+                                class="form-control"
+                                [value]="item.produto.descricao"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-1">
+                            <div class="form-group">
+                              <label>Quantidade</label>
+                              <input
+                                class="form-control"
+                                [value]="item.quantidade"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-1">
+                            <div class="form-group">
+                              <label>Unidade</label>
+                              <input
+                                class="form-control"
+                                [value]="item.unidade"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-1">
+                            <div class="form-group">
+                              <label>Val Unitário</label>
+                              <input
+                                class="form-control"
+                                [value]="item.valorUnitario"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-1">
+                            <div class="form-group">
+                              <label>Val Prod.</label>
+                              <input
+                                class="form-control"
+                                [value]="item.valorTotal"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label>NCM</label>
+                              <input
+                                class="form-control"
+                                [value]="item.produto.ncm"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label>CFOP</label>
+                              <input
+                                class="form-control"
+                                [value]="item.cfop"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Totais">
+                <app-nfe-totais
+                  *ngIf="dadosTotais"
+                  [dadosTotais]="dadosTotais"
+                ></app-nfe-totais>
+              </mat-tab>
+              <mat-tab label="Transporte">
+                <app-nfe-transporte
+                  *ngIf="dadosTransporte"
+                  [dadosTransporte]="dadosTransporte"
+                ></app-nfe-transporte>
+              </mat-tab>
+              <mat-tab label="Cobrança" *ngIf="false"></mat-tab>
+              <mat-tab label="Informações Adicionais">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-12">{{ infoAdicional }}</div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

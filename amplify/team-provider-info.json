@@ -1,0 +1,65 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nfereader-dev-232856-authRole",
+      "UnauthRoleArn": "arn:aws:iam::492510987777:role/amplify-nfereader-dev-232856-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::492510987777:role/amplify-nfereader-dev-232856-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nfereader-dev-232856-deployment",
+      "UnauthRoleName": "amplify-nfereader-dev-232856-unauthRole",
+      "StackName": "amplify-nfereader-dev-232856",
+      "StackId": "arn:aws:cloudformation:us-east-1:492510987777:stack/amplify-nfereader-dev-232856/b6dbdb90-91db-11ec-94bd-0acb4301daff",
+      "AmplifyAppId": "dnkxfeil8iitf"
+    },
+    "categories": {
+      "auth": {
+        "nfereadere7b7e598": {}
+      },
+      "function": {
+        "sendNotificationFromS3BucketToSQS": {
+          "deploymentBucketName": "amplify-nfereader-dev-232856-deployment",
+          "s3Key": "amplify-builds/sendNotificationFromS3BucketToSQS-542b54447346776b3151-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dnkxfeil8iitf",
+          "type": "manual"
+        }
+      }
+    }
+  },
+  "nfereader": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nfereader-nfereader-190442-authRole",
+      "UnauthRoleArn": "arn:aws:iam::492510987777:role/amplify-nfereader-nfereader-190442-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::492510987777:role/amplify-nfereader-nfereader-190442-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nfereader-nfereader-190442-deployment",
+      "UnauthRoleName": "amplify-nfereader-nfereader-190442-unauthRole",
+      "StackName": "amplify-nfereader-nfereader-190442",
+      "StackId": "arn:aws:cloudformation:us-east-1:492510987777:stack/amplify-nfereader-nfereader-190442/ffcc02a0-653b-11ee-bf3a-0a2720b6d815",
+      "AmplifyAppId": "dnkxfeil8iitf"
+    },
+    "categories": {
+      "auth": {
+        "nfereadere7b7e598": {}
+      },
+      "function": {
+        "sendNotificationFromS3BucketToSQS": {
+          "deploymentBucketName": "amplify-nfereader-nfereader-190442-deployment",
+          "s3Key": "amplify-builds/sendNotificationFromS3BucketToSQS-542b54447346776b3151-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dnkxfeil8iitf",
+          "type": "manual"
+        }
+      },
+      "storage": {
+        "nfereaderxml": {}
+      }
+    }
+  }
+}

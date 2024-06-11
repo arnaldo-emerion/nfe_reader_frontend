@@ -1,0 +1,166 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Destinatários</h4>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  (click)="voltar()"
+                  class="btn btn-info btn-fill col-md-12"
+                >
+                  Voltar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <mat-tab-group animationDuration="0ms" [selectedIndex]="0">
+              <mat-tab label="Identificação">
+                <div class="card">
+                  <div class="content">
+                    <mat-accordion [multi]="true">
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Dados da NFe </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form [formGroup]="formulario" #formAtividade="ngForm">
+                          <div class="row">
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>Código</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="id"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>CNPJ</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="cnpj"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Razão Social</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="nome"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Inscrição Est. </label>
+                                <input
+                                  class="form-control"
+                                  formControlName="ie"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Endereço </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <form [formGroup]="formularioEndereco">
+                          <div class="row">
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>CEP</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="cep"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label>Bairro</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="bairro"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Municipio</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="xmun"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>UF</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="uf"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Telefone</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="fone"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Notas Fiscais">
+                <app-tabela
+                  *ngIf="data$ | async as data"
+                  [displayedColumns]="displayedColumns"
+                  [dados]="data"
+                  [headerTitle]="'Lista de NFe já emitidas'"
+                  [showAddButtom]="false"
+                  [marginTopClass]="'mt-0'"
+                  (selectedRow)="onRowSelect($event)"
+                ></app-tabela>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

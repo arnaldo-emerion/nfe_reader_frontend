@@ -1,0 +1,115 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" *ngIf="produtoInfo$ | async as info">
+          <div class="card-header card-header-danger">
+            <h4 class="title">
+              ({{ info.codigo }}) (NCM: {{ data.produtoModel.ncm }}) -
+              {{ produtoNome }}
+            </h4>
+            <p class="card-category">Informações sobre o Produto Selecionado</p>
+          </div>
+          <div class="card-body">
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Volume</label>
+              </div>
+              <div class="col-md-2 text-end">
+                <span class="fl">{{ info.unidade }} </span>
+                {{ info.volume }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Participação no Volume (%)</label
+                >
+              </div>
+              <div class="col-md-2 text-end">
+                {{ info.partVolume | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Faturamento Total do Item</label
+                >
+              </div>
+              <div class="col-md-2 text-end">
+                <span class="fl">R$ </span
+                >{{ info.faturamento | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Participação no Faturamento (%)</label
+                >
+              </div>
+              <div class="col-md-2 text-end">
+                {{ info.partFaturamento | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Frequência</label>
+              </div>
+              <div class="col-md-2 text-end">
+                {{ info.frequencia | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Participação na Frequência (%)</label
+                >
+              </div>
+              <div class="col-md-2 text-end">
+                {{ info.partFrequencia | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label"
+                  >Preço Médio por Item - (R$ / PC)</label
+                >
+              </div>
+              <div class="col-md-2 text-end">
+                <span class="fl">R$ </span
+                >{{ info.precoMedio | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row zebra">
+              <div class="col-md-5">
+                <label class="aluno-chamada-label">Ticket Médio</label>
+              </div>
+              <div class="col-md-2 text-end">
+                <span class="fl">R$ </span
+                >{{ info.ticketMedio | number: "1.2-2" }}
+              </div>
+            </div>
+
+            <div class="row mt-3 d-flex flex-row-reverse">
+              <div class="col-md-3">
+                <button
+                  class="btn btn-danger btn-fill col-md-12"
+                  (click)="closeDialog()"
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

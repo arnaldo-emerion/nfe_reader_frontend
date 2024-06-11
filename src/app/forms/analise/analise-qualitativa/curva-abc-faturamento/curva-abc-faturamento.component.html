@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h5 class="card-title"></h5>
+
+            <div>
+              <div class="">
+                <div
+                  class="d-flex flex-row-reverse col-md-6"
+                  style="float: right"
+                >
+                  <mat-button-toggle-group
+                    name="tipoCurvaABC"
+                    aria-label="Tipo Curva ABC"
+                    style="border: 1px solid"
+                  >
+                    <mat-button-toggle
+                      [checked]="checkedButton == anual.value"
+                      value="anual"
+                      #anual
+                      (click)="toggleTipoGrafico(anual)"
+                      >Anual</mat-button-toggle
+                    >
+
+                    <mat-button-toggle
+                      [checked]="checkedButton == mensal.value"
+                      value="mensal"
+                      #mensal
+                      (click)="toggleTipoGrafico(mensal)"
+                      >Mensal</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                  <label class="tipo-curva-abc-label">Tipo de Curva ABC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas
+              id="curva-abc-faturamento"
+              width="400"
+              height="150"
+            ></canvas>
+          </div>
+          <div class="card-footer">
+            <div class="chart-legend" *ngIf="showFooter">
+              <span *ngFor="let legend of legends" [style.color]="legend.color">
+                <i class="fa fa-circle" [style.color]="legend.color"></i>
+                {{ legend.nome }}
+              </span>
+            </div>
+            <hr />
+            <div class="card-stats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

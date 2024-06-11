@@ -1,0 +1,122 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Itens de NF para serem Processadas</h4>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  (click)="voltar()"
+                  class="btn btn-info btn-fill col-md-12"
+                >
+                  Voltar
+                </button>
+              </div>
+            </div>
+            <div class="row col-md-12">
+              <h4 class="col-md-12">
+                Status do Envio: {{ totalProcessado }} /
+                {{ totalGeral }}
+              </h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <mat-tab-group >
+              <mat-tab label="Processar arquivos">
+                <div class="">
+                  <div class="upload-btn-wrapper tc">
+                    <button
+                      class="btn btn-success col-md-3 mr-1"
+                      (click)="files.click()"
+                    >
+                      Localizar os Arquivos
+                    </button>
+                    <input
+                      #files
+                      id="singleFile"
+                      name="myfile"
+                      type="file"
+                      multiple
+                      hidden
+                      (change)="selectFiles($event)"
+                    />
+
+                    <button
+                      class="btn btn-success col-md-2 ml-1"
+                      [disabled]="!selectedFiles"
+                      (click)="uploadFiles()"
+                    >
+                      Processar Arquivos
+                    </button>
+                  </div>
+                </div>
+
+                <div class="">
+                  <table
+                    mat-table
+                    [dataSource]="dataSource"
+                    class="mat-elevation-z8 container-fluid"
+                  >
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef>No.</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.nNF }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef>Razão Social</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{
+                          element.destinatario
+                            ? element.destinatario
+                            : element.name
+                        }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Motivo -->
+                    <ng-container matColumnDef="motivo">
+                      <th mat-header-cell *matHeaderCellDef>Motivo</th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.motivo }}
+                      </td>
+                    </ng-container>
+
+                    <tr
+                      mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                      style="background-color: #6fbce0a3"
+                    ></tr>
+
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                      class="linha"
+                      [class.processing]="row?.status == 'processing'"
+                      [class.success]="row?.status == 'success'"
+                      [class.failure]="row?.status == 'failure'"
+                    ></tr>
+                  </table>
+                </div>
+
+                <mat-paginator
+                  #paginatorLoadFiles
+                  [pageSizeOptions]="[10, 20, 30, 50, 100]"
+                  showFirstLastButtons
+                ></mat-paginator>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

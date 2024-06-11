@@ -1,0 +1,363 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Totais de Impostos Apurados</h4>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  class="btn btn-info btn-fill col-md-12"
+                  (click)="voltar()"
+                >
+                  Voltar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="col-md-12">
+              <div
+                class="filter-panel"
+                style="width: 100%; display: inline-flex; align-items: baseline"
+              >
+                <label style="margin-right: 1%">De</label>
+                <input
+                  class="form-control filter-data"
+                  [matDatepicker]="dataInicial"
+                  matInput
+                  dateMask
+                />
+                <mat-datepicker #dataInicial></mat-datepicker>
+
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dataInicial"
+                ></mat-datepicker-toggle>
+
+                <label style="margin-left: 1%; margin-right: 1%"> até </label>
+
+                <input
+                  class="form-control filter-data"
+                  [matDatepicker]="dataFinal"
+                  dateMask
+                />
+                <mat-datepicker #dataFinal></mat-datepicker>
+
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dataFinal"
+                ></mat-datepicker-toggle>
+
+                <div>
+                  <button
+                    class="btn btn-success"
+                    (click)="filtarRegistros(dataInicial, dataFinal)"
+                  >
+                    Aplicar Filtro
+                  </button>
+
+                  <button
+                    class="btn btn-success ml-1"
+                    style="position: absolute; right: 3%"
+                    (click)="limparSelecao(dataInicial, dataFinal)"
+                  >
+                    Limpar Filtro
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <form *ngIf="dadosTotais$ | async as dadosTotais">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Base de Cálculo ICMS</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vbc | number: '1.2-2'"
+                            readonly
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor do ICMS</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vicms | number: '1.2-2'"
+                            readonly
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor do ICMS Desonerado</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vicmsdeson | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total do FCP</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vfcp | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total ICMS FCP</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vfcp | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label
+                            >Valor Total ICMS Interestadual UF Destino</label
+                          >
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vicmsufdest | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total ICMS Interestadual UF Rem.</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vicmsufremet | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Base de Cálculo ICMS ST</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vbcst | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor ICMS Substituição</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vst | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total do FCP retido por ST</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vfcpstret | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label
+                            >Valor Total do FCP retido anteriormente por
+                            ST</label
+                          >
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.pfcpstret | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label> Valor Total dos Produtos </label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vprod | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor do Frete</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vfrete | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor do Seguro</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vseg | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total dos Descontos</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vdesc | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total do II</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vii | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total do IPI</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vipi | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total do IPI Devolvido</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vipidevol | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor do PIS</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vpis | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor da COFINS</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vcofins | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Outras Despesas Acessórias</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.voutro | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Total da NFe</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vnf | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Valor Aproximado dos Tributos</label>
+                          <input
+                            class="form-control"
+                            [value]="dadosTotais.vtottrib | number: '1.2-2'"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12"></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

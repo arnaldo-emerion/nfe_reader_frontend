@@ -1,0 +1,13 @@
+{
+  "resourceName": "nfereaderxml",
+  "policyUUID": "7278e2eb",
+  "bucketName": "nfe-reader-xml",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

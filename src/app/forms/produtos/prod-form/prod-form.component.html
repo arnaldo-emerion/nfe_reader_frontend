@@ -1,0 +1,218 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Produtos</h4>
+                <p class="card-category">
+                  {{ descricaoSubTitle }}
+                </p>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  (click)="voltar()"
+                  class="btn btn-info btn-fill col-md-12"
+                >
+                  Voltar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <mat-tab-group animationDuration="0ms" [selectedIndex]="0">
+              <mat-tab label="Identificação">
+                <div class="card">
+                  <div class="content">
+                    <mat-accordion [multi]="true">
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Dados do Item </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form [formGroup]="formulario" #formAtividade="ngForm">
+                          <div class="row">
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label>Código</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="codigo"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>NCM</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="ncm"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Descrição</label>
+                                <input
+                                  class="form-control"
+                                  formControlName="nome"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-md-1">
+                              <div class="form-group">
+                                <label>UN </label>
+                                <input
+                                  class="form-control"
+                                  formControlName="unidade"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12"></div>
+                          </div>
+                        </form>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Notas Fiscais já Emitidas com este produto">
+                <app-tabela
+                  #table
+                  *ngIf="data$ | async as data"
+                  [displayedColumns]="displayedColumns"
+                  [dados]="data"
+                  [showHeader]="false"
+                  [headerTitle]="'Lista de NFe já emitidas'"
+                  [showAddButtom]="false"
+                  [marginTopClass]="'mt-0'"
+                  (selectedRow)="onRowSelect($event)"
+                  (exportToExcelFunc)="exportToExcelFunc($event)"
+                >
+                  <div slot="aboveFilter">
+                    <div
+                      class="filtro row"
+                      style="
+                        width: 100%;
+                        display: inline-flex;
+                        align-items: baseline;
+                      "
+                    >
+                      <div class="col-md-2">
+                        <mat-form-field appearance="standard">
+                          <mat-label>UF</mat-label>
+                          <mat-select
+                            #estado
+                            (selectionChange)="filtrarEstado(estado.value)"
+                          >
+                            <mat-option [value]="'TODOS'"> Todos </mat-option>
+                            <mat-option
+                              *ngFor="let estado of estados"
+                              [value]="estado.sigla"
+                            >
+                              {{ estado.nome }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-2">
+                        <mat-form-field appearance="standard">
+                          <mat-label>Municipio</mat-label>
+                          <mat-select
+                            #municipio
+                            (selectionChange)="
+                              filtrarMunicipio(municipio.value)
+                            "
+                          >
+                            <mat-option [value]="'TODOS'"> Todos </mat-option>
+                            <mat-option
+                              *ngFor="let municipio of municipioList"
+                              [value]="municipio"
+                            >
+                              {{ municipio }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <label style="margin-right: 1%">De</label>
+                      <input
+                        class="form-control filter-data"
+                        [matDatepicker]="dataInicial"
+                        matInput
+                        dateMask
+                      />
+                      <mat-datepicker #dataInicial></mat-datepicker>
+
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="dataInicial"
+                      ></mat-datepicker-toggle>
+
+                      <label style="margin-left: 1%; margin-right: 1%">
+                        até
+                      </label>
+
+                      <input
+                        class="form-control filter-data"
+                        [matDatepicker]="dataFinal"
+                        dateMask
+                      />
+                      <mat-datepicker #dataFinal></mat-datepicker>
+
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="dataFinal"
+                      ></mat-datepicker-toggle>
+
+                      <div style="min-width: 25%">
+                        <button
+                          class="btn btn-success"
+                          (click)="filtarRegistros(dataInicial, dataFinal)"
+                        >
+                          Filtrar Por data
+                        </button>
+
+                        <button
+                          class="btn btn-success ml-1"
+                          style="position: absolute; right: 3%"
+                          (click)="limparSelecao(dataInicial, dataFinal)"
+                        >
+                          Limpar Filtro
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div slot="available-actions">
+                    <div class="icone ml-15 clickme">
+                      <img
+                        [src]="'/assets/img/export_all_items.svg'"
+                        alt="Exportar para Excel"
+                        [title]="'Exportar APENAS o item: ' + identifier"
+                        class="img-centered"
+                        (click)="
+                          exportToExcelFuncSpecific(table.selection.selected)
+                        "
+                      />
+                    </div>
+                  </div>
+                </app-tabela>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

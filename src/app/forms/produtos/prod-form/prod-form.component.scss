@@ -1,0 +1,13 @@
+.filtro .form-control {
+  width: auto;
+  display: inline-block;
+}
+
+.filter-data {
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+::ng-deep app-tabela .card {
+  margin-top: 0px;
+}

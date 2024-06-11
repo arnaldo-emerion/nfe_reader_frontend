@@ -1,0 +1,6 @@
+projectKey=nfe-reader-fontend
+serverUrl=http://localhost:9000
+serverVersion=7.5.0.20543
+dashboardUrl=http://localhost:9000/dashboard?id=nfe-reader-fontend
+ceTaskId=AX9puPUJ7kAmJounPH3G
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX9puPUJ7kAmJounPH3G

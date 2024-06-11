@@ -1,0 +1,42 @@
+<app-tabela
+  *ngIf="data$ | async as data"
+  [displayedColumns]="displayedColumns"
+  [dados]="data"
+  [headerTitle]="'Lista de Transportadoras cadastrados no Sistema'"
+  [showAddButtom]="false"
+  (acaoSelecionada)="executarAcao($event)"
+>
+  <div slot="aboveFilter">
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field appearance="standard">
+          <mat-label>UF</mat-label>
+          <mat-select #estado (selectionChange)="filtrarEstado(estado.value)">
+            <mat-option [value]="'TODOS'"> Todos </mat-option>
+            <mat-option *ngFor="let estado of estados" [value]="estado.sigla">
+              {{ estado.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field appearance="standard">
+          <mat-label>Municipio</mat-label>
+          <mat-select
+            #municipio
+            (selectionChange)="filtrarMunicipio(municipio.value)"
+          >
+            <mat-option [value]="'TODOS'"> Todos </mat-option>
+            <mat-option
+              *ngFor="let municipio of municipioList"
+              [value]="municipio"
+            >
+              {{ municipio }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</app-tabela>

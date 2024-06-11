@@ -1,0 +1,104 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger" *ngIf="showHeader">
+            <h5 class="card-title">Aplicar Filtros</h5>
+
+            <div>
+              <div class="">
+                <label style="margin-right: 1%">De</label>
+                <input
+                  class="form-control"
+                  [matDatepicker]="dataInicial"
+                  readonly
+                />
+                <mat-datepicker #dataInicial></mat-datepicker>
+
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dataInicial"
+                ></mat-datepicker-toggle>
+
+                <label style="margin-left: 1%; margin-right: 1%"> até </label>
+
+                <input
+                  class="form-control"
+                  [matDatepicker]="dataFinal"
+                  readonly
+                />
+                <mat-datepicker #dataFinal></mat-datepicker>
+
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dataFinal"
+                ></mat-datepicker-toggle>
+
+                <button
+                  class="btn btn-success"
+                  (click)="filtrarRegistros(dataInicial, dataFinal)"
+                >
+                  Filtrar por Data
+                </button>
+
+                <button
+                  class="btn btn-success ml-1"
+                  (click)="limparSelecao(dataInicial, dataFinal)"
+                >
+                  Limpar Filtro
+                </button>
+
+                <div
+                  class="d-flex flex-row-reverse col-md-3"
+                  style="float: right"
+                >
+                  <mat-button-toggle-group
+                    name="tipoCurvaABC"
+                    aria-label="Tipo Curva ABC"
+                    style="border: 1px solid"
+                  >
+                    <mat-button-toggle
+                      [checked]="checkedButton == valorTotal.value"
+                      value="valorTotal"
+                      #valorTotal
+                      (click)="toggleTipoCurvaABC(valorTotal)"
+                      >Valor Total</mat-button-toggle
+                    >
+                    <mat-button-toggle
+                      [checked]="checkedButton == frequencia.value"
+                      value="frequencia"
+                      #frequencia
+                      (click)="toggleTipoCurvaABC(frequencia)"
+                      >Frequência</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                  <label class="tipo-curva-abc-label">Tipo de Curva ABC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="grafico">
+              <canvas
+                id="exceptionGrowthByMonth"
+                width="400"
+                height="145"
+              ></canvas>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="chart-legend" *ngIf="showFooter">
+              <span *ngFor="let legend of legends" [style.color]="legend.color">
+                <i class="fa fa-circle" [style.color]="legend.color"></i>
+                {{ legend.nome }}
+              </span>
+            </div>
+            <hr />
+            <div class="card-stats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
