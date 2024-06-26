@@ -16,7 +16,7 @@ export class DashboardService {
   }
 
   getCurvaABCFaturamentoDiario(): Observable<any> {
-    return this.http.get(API + "/curva-abc/faturamento/diario");
+    return this.http.get(API + "/api/v1/curva-abc/faturamento/diario");
   }
 
   getQtdProdutosDiaADia(): Observable<any> {

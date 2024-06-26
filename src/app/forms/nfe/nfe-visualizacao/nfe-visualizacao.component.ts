@@ -54,7 +54,7 @@ export class NfeVisualizacaoComponent implements OnInit {
     this.service.getById(this.identifier).subscribe((data) => {
       this.dadosEmit = data.emitente;
       this.dadosDest = data.destinatario;
-      this.dadosTotais = data.nfeTotalICMS;
+      this.dadosTotais = data.totalIcms;
       this.dadosTransporte = data.transportadora;
       this.infoAdicional = data.infoAdicional;
 
@@ -67,10 +67,10 @@ export class NfeVisualizacaoComponent implements OnInit {
         chaveNFe: data.chaveNFe,
         nNF: data.nnf,
         dhEmi: moment(data.dataEmissao).format("DD/MM/yyyy"),
-        vprod: data.nfeTotalICMS.vprod,
-        vicms: data.nfeTotalICMS.vicms,
-        vipi: data.nfeTotalICMS.vipi,
-        vnf: data.nfeTotalICMS.vnf,
+        vprod: data.totalIcms.vprod,
+        vicms: data.totalIcms.vicms,
+        vipi: data.totalIcms.vipi,
+        vnf: data.totalIcms.vnf,
       };
 
       const emitente = {
