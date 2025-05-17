@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, NgForm } from "@angular/forms";
 import { MatAccordion } from "@angular/material/expansion";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Storage } from "aws-amplify";
@@ -20,16 +20,16 @@ export class NfeVisualizacaoComponent implements OnInit {
 
   identifier: string;
   itemList: [];
-  formulario: FormGroup;
-  formularioEmitente: FormGroup;
-  formularioDestinatario: FormGroup;
+  formulario: UntypedFormGroup;
+  formularioEmitente: UntypedFormGroup;
+  formularioDestinatario: UntypedFormGroup;
 
   activeTab;
 
   constructor(
     private service: NFeService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private location: Location
   ) {}
@@ -54,7 +54,7 @@ export class NfeVisualizacaoComponent implements OnInit {
     this.service.getById(this.identifier).subscribe((data) => {
       this.dadosEmit = data.emitente;
       this.dadosDest = data.destinatario;
-      this.dadosTotais = data.nfeTotalICMS;
+      this.dadosTotais = data.totalIcms;
       this.dadosTransporte = data.transportadora;
       this.infoAdicional = data.infoAdicional;
 
@@ -67,15 +67,15 @@ export class NfeVisualizacaoComponent implements OnInit {
         chaveNFe: data.chaveNFe,
         nNF: data.nnf,
         dhEmi: moment(data.dataEmissao).format("DD/MM/yyyy"),
-        vprod: data.nfeTotalICMS.vprod,
-        vicms: data.nfeTotalICMS.vicms,
-        vipi: data.nfeTotalICMS.vipi,
-        vnf: data.nfeTotalICMS.vnf,
+        vprod: data.totalIcms.valorProdutos,
+        vicms: data.totalIcms.valorIcms,
+        vipi: data.totalIcms.valorIpi,
+        vnf: data.totalIcms.valorNotaFiscal,
       };
 
       const emitente = {
-        cnpj: data.emitente.cnpj,
-        ie: data.emitente.ie,
+        cnpj: data.emitente.cpfCnpj,
+        ie: data.emitente.inscricaoEstadual,
         razaoSocial: data.emitente.razaoSocial,
         municipio: data.emitente.municipio,
         uf: data.emitente.uf,
@@ -83,14 +83,14 @@ export class NfeVisualizacaoComponent implements OnInit {
 
       const destinatario = {
         id: data.destinatario.id,
-        cnpj: data.destinatario.cnpj,
+        cnpj: data.destinatario.cpfCnpj,
         ie: data.destinatario.ie,
         razaoSocial: data.destinatario.razaoSocial,
         municipio: data.destinatario.municipio,
         uf: data.destinatario.uf,
       };
 
-      this.itemList = data.nfeItemList;
+      this.itemList = data.items;
       this.arquivoNFe = data.fileName;
 
       this.formulario.patchValue(nfe);

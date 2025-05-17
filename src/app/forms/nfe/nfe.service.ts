@@ -12,7 +12,7 @@ export class NFeService {
   constructor(private http: HttpClient) {}
 
   getById(identificador): Observable<any> {
-    return this.http.get(API + "/nfe/" + identificador);
+    return this.http.get(API + "/api/v1/nfe/" + identificador);
   }
 
   getCabecalho(): Observable<any> {

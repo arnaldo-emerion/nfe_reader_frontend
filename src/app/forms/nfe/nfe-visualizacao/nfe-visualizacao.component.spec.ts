@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -39,7 +39,7 @@ describe("NfeVisualizacaoComponent", () => {
       ],
       providers: [
         NFeService,
-        FormBuilder,
+        UntypedFormBuilder,
         Location,
         {
           provide: ActivatedRoute,

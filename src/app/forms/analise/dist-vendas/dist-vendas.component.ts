@@ -53,7 +53,11 @@ export class DistVendasComponent implements OnInit {
     if (!$event) {
       return;
     }
-    this.router.navigate(["nfe/" + $event.id]);
+    if($event.tipoDocumento == "CUPOM_FISCAL") {
+      console.log("Visualização ainda não implementada")
+    } else {
+      this.router.navigate(["nfe/" + $event.id]);
+    }
   }
 
   executarAcao(acaoPropagate) {

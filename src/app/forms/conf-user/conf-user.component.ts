@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { ThemePalette } from "@angular/material/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { NotificationService } from "app/shared/notification/notification.service";
@@ -19,7 +19,7 @@ export interface Task {
   styleUrls: ["./conf-user.component.css"],
 })
 export class ConfUserComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: UntypedFormGroup;
   userConf;
   parametrosNatOperacao: any[];
   selectedNatOperacaoParam;

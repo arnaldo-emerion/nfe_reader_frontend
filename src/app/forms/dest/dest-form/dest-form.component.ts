@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { NFeService } from "../../nfe/nfe.service";
@@ -16,8 +16,8 @@ export class DestFormComponent implements OnInit {
 
   identifier: string;
   obj$: Observable<any>;
-  formulario: FormGroup;
-  formularioEndereco: FormGroup;
+  formulario: UntypedFormGroup;
+  formularioEndereco: UntypedFormGroup;
   activeTab;
 
   displayedColumns = [
@@ -31,7 +31,7 @@ export class DestFormComponent implements OnInit {
   constructor(
     private service: DestService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private nfeService: NFeService,
     private location: Location,
     private router: Router
@@ -50,7 +50,7 @@ export class DestFormComponent implements OnInit {
     this.service.getById(this.identifier).subscribe((data) => {
       const nfe = {
         id: data.id,
-        cnpj: data.cnpj,
+        cpfCnpj: data.cpfCnpj,
         nome: data.razaoSocial,
         ie: data.ie,
       };
@@ -67,7 +67,7 @@ export class DestFormComponent implements OnInit {
       this.formulario.patchValue(nfe);
       this.formularioEndereco.patchValue(endereco);
 
-      this.data$ = this.nfeService.getByCnpj(data.cnpj);
+      this.data$ = this.nfeService.getByCnpj(data.cpfCnpj);
     });
   }
 
@@ -100,7 +100,7 @@ export class DestFormComponent implements OnInit {
   private construirFormulario() {
     this.formulario = this.formBuilder.group({
       id: [{ value: "", disabled: true }],
-      cnpj: [{ value: "", disabled: true }],
+      cpfCnpj: [{ value: "", disabled: true }],
       nome: [{ value: "", disabled: true }],
       ie: [{ value: "", disabled: true }],
     });

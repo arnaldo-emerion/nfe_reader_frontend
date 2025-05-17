@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { MatSelect } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ESTADOS_ARRAY } from "app/arrays/estados.arrays";
@@ -29,7 +29,7 @@ export class ProdFormComponent implements OnInit {
 
   identifier: string;
   obj$: Observable<any>;
-  formulario: FormGroup;
+  formulario: UntypedFormGroup;
   activeTab;
 
   descricaoSubTitle;
@@ -58,7 +58,7 @@ export class ProdFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private nfeService: NFeService,
     private location: Location,
     private prodService: ProdutoService,
@@ -106,7 +106,11 @@ export class ProdFormComponent implements OnInit {
     if (!$event) {
       return;
     }
-    this.router.navigate(["nfe/" + $event.id]);
+    if($event.tipoDocumento == "CUPOM_FISCAL") {
+      console.log("Visualização ainda não implementada")
+    } else {
+      this.router.navigate(["nfe/" + $event.id]);
+    }
   }
 
   update() {

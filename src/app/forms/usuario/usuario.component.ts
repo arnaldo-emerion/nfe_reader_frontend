@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { CognitoUser } from "@aws-amplify/auth";
 import { UsuarioService } from "app/services/loading-service.ts/usuario.service";
@@ -14,15 +14,15 @@ import { UsuarioCadastroService } from "./usuario.service";
 })
 export class UsuarioComponent implements OnInit {
   editing = false;
-  formEmpresa: FormGroup;
-  formUser: FormGroup;
+  formEmpresa: UntypedFormGroup;
+  formUser: UntypedFormGroup;
   userInfo;
   imageSource;
 
   constructor(
     private userService: UsuarioService,
     private usuarioCadastroService: UsuarioCadastroService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private msgService: NotificationService,
     private sanitizer: DomSanitizer,
     private usuarioService: UsuarioService

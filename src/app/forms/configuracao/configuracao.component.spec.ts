@@ -1,7 +1,7 @@
 import { Location } from "@angular/common";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -33,7 +33,7 @@ describe("ConfiguracaoComponent", () => {
       ],
       providers: [
         Location,
-        FormBuilder,
+        UntypedFormBuilder,
         ConfiguracaoGeralService,
         NotificationService,
       ],

@@ -6,6 +6,7 @@ import * as moment from "moment";
 import { of } from "rxjs";
 import { tap } from "rxjs/operators";
 import { NFeService } from "../nfe.service";
+import { log } from "console";
 
 @Component({
   selector: "app-nfe-listagem",
@@ -40,6 +41,7 @@ export class NfeListagemComponent implements OnInit {
   }
 
   loadData() {
+    console.log("LOAD DATA")
     this.data$ = this.service.getCabecalho().pipe(
       tap((d) => {
         this.allData = d;
@@ -51,7 +53,11 @@ export class NfeListagemComponent implements OnInit {
     if (!$event) {
       return;
     }
-    this.router.navigate(["nfe/" + $event.id]);
+    if($event.tipoDocumento == "CUPOM_FISCAL") {
+      console.log("Visualização ainda não implementada")
+    } else {
+      this.router.navigate(["nfe/" + $event.id]);
+    }
   }
 
   executarAcao(acaoPropagate) {

@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { NotificationService } from "app/shared/notification/notification.service";
 import { ConfiguracaoGeralService } from "./configuracao.service";
 
@@ -10,11 +10,11 @@ import { ConfiguracaoGeralService } from "./configuracao.service";
   styleUrls: ["./configuracao.component.css"],
 })
 export class ConfiguracaoComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: UntypedFormGroup;
 
   constructor(
     private location: Location,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private configGeralService: ConfiguracaoGeralService,
     private msgService: NotificationService
   ) {}
