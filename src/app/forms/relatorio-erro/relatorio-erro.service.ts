@@ -12,6 +12,6 @@ export class RelatorioErroService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(API + "/historico-processamento/erros");
+    return this.http.get(API + "/api/v1/historico-processamento/erros");
   }
 }
