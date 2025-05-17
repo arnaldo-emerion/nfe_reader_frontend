@@ -16,12 +16,12 @@ export class NFeService {
   }
 
   getCabecalho(): Observable<any> {
-    return this.http.get(API + "/documento-fiscal/cabecalho");
+    return this.http.get(API + "/api/v1/documento-fiscal/cabecalho");
   }
 
   getCabecalhoFiltrado(dataInicial, dataFinal, estado): Observable<any> {
     return this.http.get(
-      API + "/nfe/cabecalho/" + dataInicial + "/" + dataFinal + "/" + estado
+      API + "/api/v1/documento-fiscal/cabecalho/" + dataInicial + "/" + dataFinal + "/" + estado
     );
   }
 

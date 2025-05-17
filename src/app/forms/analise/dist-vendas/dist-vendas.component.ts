@@ -20,15 +20,15 @@ export class DistVendasComponent implements OnInit {
   qtdEstados;
 
   displayedColumns = [
-    { head: "N° NFe", el: "nnf" },
+    { head: "N° NFe", el: "numeroDocumento" },
     { head: "Razão Social", el: "razaoSocial" },
-    { head: "Nat. Operação", el: "natOp" },
+    { head: "Nat. Operação", el: "naturezaOperacao" },
     { head: "UF", el: "uf" },
     { head: "Data", el: "dhEmi", format: { tipo: "DATE" } },
     { head: "Qtd. Pedido", el: "totalPedidos" },
     {
       head: "Valor",
-      el: "vnf",
+      el: "valorNotaFiscal",
       format: { tipo: "PIPE", pipe: "currency", arguments: "BRL" },
     },
   ];
@@ -73,7 +73,7 @@ export class DistVendasComponent implements OnInit {
     this.qtdNotas = $event.length;
     this.totalNF = $event.reduce((a, b) => (a += b.vnf), 0);
     const clientes = Array.from(
-      $event.reduce((m, t) => m.set(t.cnpjDest, t), new Map()).values()
+      $event.reduce((m, t) => m.set(t.cpfCnpjDestinatario, t), new Map()).values()
     );
     this.qtdClientes = clientes.length;
 
