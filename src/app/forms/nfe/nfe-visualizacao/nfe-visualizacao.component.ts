@@ -55,6 +55,7 @@ export class NfeVisualizacaoComponent implements OnInit {
       this.dadosEmit = data.emitente;
       this.dadosDest = data.destinatario;
       this.dadosTotais = data.totalIcms;
+      this.dadosTotais = data.totalIcms;
       this.dadosTransporte = data.transportadora;
       this.infoAdicional = data.infoAdicional;
 
