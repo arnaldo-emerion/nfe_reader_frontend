@@ -22,6 +22,6 @@ export class EmitenteService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(API + "/emitente");
+    return this.http.get(API + "/api/v1/emitente");
   }
 }
