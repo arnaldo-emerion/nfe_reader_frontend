@@ -27,6 +27,10 @@ export class ConfUserService {
     return this.http.delete(API + "/configuracao-usuario/nfe/all");
   }
 
+  deleteAllCFe() {
+    return this.http.delete(API + "/configuracao-usuario/cfe/all");
+  }
+
   getEstatisticaUtilizacao() {
     return this.http.get(API + "/api/v1/configuracao-usuario/estatistica-registros");
   }

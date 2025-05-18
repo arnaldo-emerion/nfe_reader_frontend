@@ -17,13 +17,19 @@ export class ManutencaoRegistrosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.confUserService.getEstatisticaUtilizacao().subscribe((data) => {
+    this.confUserService.getEstatisticaUtilizacao().subscribe((data:any) => {
       this.tipoCadastriList = [
         {
           labelCadastro: "Notas Fiscais",
-          qtd: data,
+          qtd: data.nfeCount,
           labelBotao: "Deletar todas as Notas Fiscais",
           tipoCadastro: "NFE",
+        },
+        {
+          labelCadastro: "Cumpons Fiscais",
+          qtd: data.cupomCount,
+          labelBotao: "Deletar todos os Cupons Fiscais",
+          tipoCadastro: "CFE",
         },
       ];
     });
@@ -45,6 +51,24 @@ export class ManutencaoRegistrosComponent implements OnInit {
                 qtd: 0,
                 labelBotao: "Deletar todas as Notas Fiscais",
                 tipoCadastro: "NFE",
+              },
+            ];
+          });
+        }
+        break;
+      case "CFE":
+        {
+          this.confUserService.deleteAllCFe().subscribe(() => {
+            this.notificationService.showSucess(
+              "Todos os Cupons Fiscais foram removidos com sucesso"
+            );
+
+            this.tipoCadastriList = [
+              {
+                labelCadastro: "Cumpons Fiscais",
+                qtd: 0,
+                labelBotao: "Deletar todas os Cumpons Fiscais",
+                tipoCadastro: "CFE",
               },
             ];
           });
