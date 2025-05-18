@@ -337,7 +337,4 @@ export class ProdFormComponent implements OnInit {
     );
   }
 
-  print(msg) {
-    console.log(msg);
-  }
 }

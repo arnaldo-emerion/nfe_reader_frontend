@@ -34,8 +34,6 @@ export class UsuarioCadastroService {
       Auth.currentSession().then((session) => {
         const payload = session.getIdToken().payload;
         Auth.currentCredentials().then((auth) => {
-          console.log(2);
-
           const userInfo = {
             cognitoUserName: payload["cognito:username"],
             email: payload.email,

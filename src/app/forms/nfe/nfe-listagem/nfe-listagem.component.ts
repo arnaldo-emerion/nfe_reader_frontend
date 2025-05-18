@@ -41,7 +41,6 @@ export class NfeListagemComponent implements OnInit {
   }
 
   loadData() {
-    console.log("LOAD DATA")
     this.data$ = this.service.getCabecalho().pipe(
       tap((d) => {
         this.allData = d;

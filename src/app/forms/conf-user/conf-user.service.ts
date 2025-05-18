@@ -12,11 +12,11 @@ export class ConfUserService {
   constructor(private http: HttpClient) {}
 
   getTipoNFeDisponiveisList(): Observable<any> {
-    return this.http.get(API + "/configuracao-usuario/tipos-disponiveis");
+    return this.http.get(API + "/api/v1/configuracao-usuario/tipos-disponiveis");
   }
 
   getUserConfiguration(): Observable<any> {
-    return this.http.get(API + "/configuracao-usuario");
+    return this.http.get(API + "/api/v1/configuracao-usuario");
   }
 
   saveUserConfiguration(userConf): Observable<any> {
@@ -28,6 +28,6 @@ export class ConfUserService {
   }
 
   getEstatisticaUtilizacao() {
-    return this.http.get(API + "/configuracao-usuario/estatistica-registros");
+    return this.http.get(API + "/api/v1/configuracao-usuario/estatistica-registros");
   }
 }
