@@ -319,7 +319,7 @@
                       >
                         <mat-expansion-panel-header>
                           <mat-panel-title>
-                            ({{ item.nitem }}) {{ item.produto.descricao }}
+                            ({{ item.nItem }}) {{ item.descricao }}
                           </mat-panel-title>
                         </mat-expansion-panel-header>
 
@@ -329,7 +329,7 @@
                               <label>Código</label>
                               <input
                                 class="form-control"
-                                [value]="item.produto.codigo"
+                                [value]="item.codigo"
                                 disabled
                               />
                             </div>
@@ -340,7 +340,7 @@
                               <label>Descrição</label>
                               <input
                                 class="form-control"
-                                [value]="item.produto.descricao"
+                                [value]="item.descricao"
                                 disabled
                               />
                             </div>
@@ -397,7 +397,7 @@
                               <label>NCM</label>
                               <input
                                 class="form-control"
-                                [value]="item.produto.ncm"
+                                [value]="item.ncm"
                                 disabled
                               />
                             </div>
