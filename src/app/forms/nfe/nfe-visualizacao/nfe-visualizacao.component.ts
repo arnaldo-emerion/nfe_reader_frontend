@@ -59,14 +59,14 @@ export class NfeVisualizacaoComponent implements OnInit {
       this.dadosTransporte = data.transportadora;
       this.infoAdicional = data.infoAdicional;
 
-      this.infoNFe = "( " + data.nnf + " ) " + data.destinatario.razaoSocial;
+      this.infoNFe = "( " + data.numeroNotaFiscal + " ) " + data.destinatario.razaoSocial;
 
       const nfe = {
         id: data.id,
-        natOp: data.natOperacao,
+        natOp: data.naturezaOPeracao,
         tpNF: data.natOperacao == 0 ? "Entrada" : "Saida",
-        chaveNFe: data.chaveNFe,
-        nNF: data.nnf,
+        chaveNFe: data.chaveAcesso,
+        nNF: data.numeroNotaFiscal,
         dhEmi: moment(data.dataEmissao).format("DD/MM/yyyy"),
         vprod: data.totalIcms.valorProdutos,
         vicms: data.totalIcms.valorIcms,

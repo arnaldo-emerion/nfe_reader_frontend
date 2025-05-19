@@ -22,11 +22,11 @@ export class NfeListagemComponent implements OnInit {
   allData;
 
   displayedColumns = [
-    { head: "N° NFe", el: "nnf" },
+    { head: "N° NFe", el: "numeroDocumento" },
     { head: "Razão Social", el: "razaoSocial" },
-    { head: "Nat. Operação", el: "natOp" },
-    { head: "Chave de Acesso", el: "chNFe" },
-    { head: "Emissão", el: "dhEmi", format: { tipo: "DATE" } },
+    { head: "Nat. Operação", el: "naturezaOperacao" },
+    { head: "Chave de Acesso", el: "chaveAcesso" },
+    { head: "Emissão", el: "emissao", format: { tipo: "DATE" } },
     { head: "Tipo Documento", el: "tipoDocumento"},
   ];
 
