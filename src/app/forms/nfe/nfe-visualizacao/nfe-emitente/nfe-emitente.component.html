@@ -23,7 +23,7 @@
               <input
                 class="form-control"
                 [value]="
-                  dadosEmit.cnpj
+                  dadosEmit.cpfCnpj
                     | pipeFormacaoColuna: { tipo: 'PIPE', pipe: 'CNPJ' }
                 "
               />
@@ -33,7 +33,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <label>IE</label>
-              <input class="form-control" [value]="dadosEmit.ie" />
+              <input class="form-control" [value]="dadosEmit.inscricaoEstadual" />
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
               <label>Pais</label>
               <input
                 class="form-control"
-                value="{{ dadosEmit.cpais }} - {{ dadosEmit.xpais }}"
+                value="{{ dadosEmit.cPais }} - {{ dadosEmit.xPais }}"
               />
             </div>
           </div>

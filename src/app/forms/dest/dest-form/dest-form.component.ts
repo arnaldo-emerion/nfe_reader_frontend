@@ -21,7 +21,7 @@ export class DestFormComponent implements OnInit {
   activeTab;
 
   displayedColumns = [
-    { head: "N° NFe", el: "numeroNotaFiscal" },
+    { head: "N° NFe", el: "numeroDocumento" },
     { head: "Razão Social", el: "razaoSocial" },
     { head: "Nat. Operação", el: "naturezaOperacao" },
     { head: "Chave de Acesso", el: "chaveAcesso" },
@@ -67,7 +67,7 @@ export class DestFormComponent implements OnInit {
       this.formulario.patchValue(nfe);
       this.formularioEndereco.patchValue(endereco);
 
-      this.data$ = this.nfeService.getByCnpj(data.cpfCnpj);
+      this.data$ = this.nfeService.getByCnpjBasic(data.cpfCnpj);
     });
   }
 

@@ -29,6 +29,10 @@ export class NFeService {
     return this.http.get(API + "/api/v1/nfe/cpf-cnpj/" + cnpj);
   }
 
+  getByCnpjBasic(cnpj): Observable<any> {
+    return this.http.get(API + "/api/v1/documento-fiscal/cabecalho-por-cpf-cnpj/" + cnpj);
+  }
+
   getByCodProd(cProd): Observable<any> {
     return this.http.get(API + "/api/v1/nfe/cprod/" + cProd);
   }

@@ -5,6 +5,9 @@ import { ThemePalette } from "@angular/material/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { NotificationService } from "app/shared/notification/notification.service";
 import { ConfUserService } from "./conf-user.service";
+import { Observable } from "rxjs";
+import { EmitenteService } from "app/services/loading-service.ts/emitente-service";
+import { tap } from "rxjs/operators";
 
 export interface Task {
   name: string;
@@ -24,6 +27,8 @@ export class ConfUserComponent implements OnInit {
   parametrosNatOperacao: any[];
   selectedNatOperacaoParam;
   editing = false;
+  emitenteData$: Observable<any>;
+  selectedCNPJ = null;
 
   confNatOperacaoDataSource;
   displayedColumns: string[] = ["name", "active", "actions"];
@@ -43,7 +48,8 @@ export class ConfUserComponent implements OnInit {
   constructor(
     private location: Location,
     private confUserService: ConfUserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private emitenteService: EmitenteService,
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +57,7 @@ export class ConfUserComponent implements OnInit {
   }
 
   loadData() {
+    this.emitenteData$ = this.emitenteService.getAll()
     this.confUserService.getUserConfiguration().subscribe((d) => {
       this.parametrosNatOperacao = d.parametroNatOperacaoList;
 
@@ -111,6 +118,7 @@ export class ConfUserComponent implements OnInit {
   }
 
   saveConfig() {
+    console.log("Selected CNPJ: " + this.selectedCNPJ)
     if (this.isConfActive) {
       this.parametrosNatOperacao.forEach((e) => {
         e.active = false;
@@ -126,6 +134,7 @@ export class ConfUserComponent implements OnInit {
         id: this.selectedNatOperacaoParam?.id,
         nfeProcessaveisList: nfeProcessaveis,
         name: this.confName,
+        cpfCnpj: this.selectedCNPJ,
         active: this.isConfActive,
       },
     ];

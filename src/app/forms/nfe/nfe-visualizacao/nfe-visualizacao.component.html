@@ -38,17 +38,8 @@
                         </mat-expansion-panel-header>
                         <form [formGroup]="formulario" #formAtividade="ngForm">
                           <div class="row">
-                            <div class="col-md-1">
-                              <div class="form-group">
-                                <label>ID</label>
-                                <input
-                                  class="form-control"
-                                  formControlName="id"
-                                />
-                              </div>
-                            </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <div class="form-group">
                                 <label>Nat. da Operação</label>
                                 <input
@@ -384,7 +375,7 @@
                               <label>Val Prod.</label>
                               <input
                                 class="form-control"
-                                [value]="item.valorTotal"
+                                [value]="item.valorProduto"
                                 disabled
                               />
                             </div>

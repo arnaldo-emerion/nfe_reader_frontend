@@ -20,11 +20,11 @@ export class ConfUserService {
   }
 
   saveUserConfiguration(userConf): Observable<any> {
-    return this.http.post(API + "/configuracao-usuario", userConf);
+    return this.http.post(API + "/api/v1/configuracao-usuario", userConf);
   }
 
   deleteAllNFe() {
-    return this.http.delete(API + "/configuracao-usuario/nfe/all");
+    return this.http.delete(API + "/api/v1/nfe/nfe");
   }
 
   deleteAllCFe() {

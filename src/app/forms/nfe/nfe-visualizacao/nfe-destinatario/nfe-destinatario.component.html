@@ -16,7 +16,7 @@
               <input
                 class="form-control"
                 [value]="
-                  dadosDest.cnpj
+                  dadosDest.cpfCnpj
                     | pipeFormacaoColuna: { tipo: 'PIPE', pipe: 'CNPJ' }
                 "
               />
@@ -75,7 +75,7 @@
               <label>Pais</label>
               <input
                 class="form-control"
-                value="{{ dadosDest.cpais }} - {{ dadosDest.xpais }}"
+                value="{{ dadosDest.cPais }} - {{ dadosDest.xPais }}"
               />
             </div>
           </div>
