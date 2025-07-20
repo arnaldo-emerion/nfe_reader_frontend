@@ -91,6 +91,7 @@ export class ConfUserComponent implements OnInit {
       this.loadConfNatOperacao(0, {
         active: "",
         name: "",
+        emitenteId: null,
         nfeProcessaveisList: [],
       });
       this.newConf();
@@ -134,7 +135,7 @@ export class ConfUserComponent implements OnInit {
         id: this.selectedNatOperacaoParam?.id,
         nfeProcessaveisList: nfeProcessaveis,
         name: this.confName,
-        cpfCnpj: this.selectedCNPJ,
+        emitenteId: this.selectedCNPJ,
         active: this.isConfActive,
       },
     ];
@@ -220,6 +221,7 @@ export class ConfUserComponent implements OnInit {
       {
         id: item.id,
         nfeProcessaveisList: item.nfeProcessaveisList,
+        emitenteId: item.emitenteId,
         name: item.name,
         active: true,
       },

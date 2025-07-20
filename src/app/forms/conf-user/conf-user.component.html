@@ -52,7 +52,8 @@
                         <div class="form-group">
                           <label>Empresa Sob Esta Sonfiguração</label>
                           <mat-select *ngIf="emitenteData$ | async as emitList"  [(value)]="selectedCNPJ">
-                            <mat-option *ngFor="let emit of emitList" [value]="emit.cpfCnpj">
+                            <mat-option [value]="null">Todas</mat-option>
+                            <mat-option *ngFor="let emit of emitList" [value]="emit.id">
                               {{ emit.nomeFantasia }}
                             </mat-option>
                           </mat-select>
