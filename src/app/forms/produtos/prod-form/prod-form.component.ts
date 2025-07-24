@@ -199,10 +199,10 @@ export class ProdFormComponent implements OnInit {
 
   exportToExcelFunc(items) {
     const codPordList = [this.identifier];
-    const nnfList = items.map((i) => i.nnf);
+    const nnfList = items.map((i) => i.id);
     if(nnfList.length == 0) return
     this.prodService
-      .getProdutosByNFeByNfeListAndProdList(codPordList, nnfList)
+      .getProdutosByNFeByNfeListAndProdList(nnfList)
       .subscribe((data: any[]) => {
         this.exportDataToExcel(data)
       });
@@ -210,10 +210,10 @@ export class ProdFormComponent implements OnInit {
 
   exportToExcelFuncSpecific(items) {
     const codPordList = [this.identifier];
-    const nnfList = items.map((i) => i.nnf);
+    const nnfList = items.map((i) => i.id);
     if(nnfList.length == 0) return
     this.prodService
-      .getProdutosByNFeByNfeListAndProdList(codPordList, nnfList)
+      .getProdutosByNFeByNfeListAndProdList(nnfList)
       .subscribe((data: any[]) => {
         this.exportDataToExcel(data, codPordList)
       });
@@ -233,63 +233,63 @@ export class ProdFormComponent implements OnInit {
       var ws = XLSX.utils.json_to_sheet([]);
       XLSX.utils.sheet_add_json(ws, [
         {
-          "Num. NFe": it.nnf,
+          "Num. NFe": it.numeroNotaFiscal,
           // Dados do Emitente
-          "CNPJ Emitente": it.emitente.cnpj,
-          "Razao Social Emitente": it.emitente.nome,
+          "CNPJ Emitente": it.emitente.cpfCnpj,
+          "Razao Social Emitente": it.emitente.razaoSocial,
           "Nome Fantasia Emitente": it.emitente.nomeFantasia,
           "Logradouro Emitente": it.emitente.logradouro,
           "Numero Emitente": it.emitente.numero,
           "Bairro Emitente": it.emitente.bairro,
-          "Municipio Emitente": it.emitente.nomeMunicipio,
+          "Municipio Emitente": it.emitente.municipio,
           "Uf Emitente": it.emitente.uf,
           "CEP Emitente": it.emitente.cep,
-          "País Emitente": it.emitente.nomePais,
-          "Telefone Emitente": it.emitente.fone,
+          "País Emitente": it.emitente.xPais,
+          "Telefone Emitente": it.emitente.telefone,
 
           // Dados do Destinatario
-          "CNPJ Destinatario": it.destinatario.cnpj,
-          "Razao Social Destinatario": it.destinatario.nome,
+          "CNPJ Destinatario": it.destinatario.cpfCnpj,
+          "Razao Social Destinatario": it.destinatario.razaoSocial,
           "Logradouro Destinatario": it.destinatario.logradouro,
           "Numero Destinatario": it.destinatario.numero,
           "Bairro Destinatario": it.destinatario.bairro,
-          "Municipio Destinatario": it.destinatario.nomeMunicipio,
+          "Municipio Destinatario": it.destinatario.municipio,
           "Uf Destinatario": it.destinatario.uf,
           "CEP Destinatario": it.destinatario.cep,
-          "País Destinatario": it.destinatario.nomePais,
-          "Telefone Destinatario": it.destinatario.fone,
+          "País Destinatario": it.destinatario.xPais,
+          "Telefone Destinatario": it.destinatario.telefone,
 
           // Dados Totais
-          "Base de Calculo": it.totais.baseCalculo,
-          "Valor do Icms": it.totais.valorIcms,
-          "Base de Calculo da ST": it.totais.baseCalculoST,
-          "Valor da ST": it.totais.valorST,
-          "Valor dos Produtos": it.totais.valorProduto,
-          "Valor do Frete": it.totais.valorFrete,
-          "Valor do Seguro": it.totais.valorSeguro,
-          "Valor do Desconto": it.totais.valorDesconto,
-          "Valor do Imposto de Importacao": it.totais.valorImpostoImportacao,
-          "Valor do Ipi": it.totais.valorIpi,
-          "Valor do Pis": it.totais.valorPis,
-          "Valor do Cofins": it.totais.valorCofins,
-          "Outros Valores": it.totais.valorOutros,
-          "Valor da NFe": it.totais.valorNFe,
+          "Base de Calculo": it.totalIcms.valorBaseCalculo,
+          "Valor do Icms": it.totalIcms.valorIcms,
+          "Base de Calculo da ST": it.totalIcms.valorBaseCalculoST,
+          "Valor da ST": it.totalIcms.valorST,
+          "Valor dos Produtos": it.totalIcms.valorProdutos,
+          "Valor do Frete": it.totalIcms.valorFrete,
+          "Valor do Seguro": it.totalIcms.valorSeguro,
+          "Valor do Desconto": it.totalIcms.valorDesconto,
+          "Valor do Imposto de Importacao": it.totalIcms.valorImpostoImportacao,
+          "Valor do Ipi": it.totalIcms.valorIpi,
+          "Valor do Pis": it.totalIcms.valorPis,
+          "Valor do Cofins": it.totalIcms.valorCofins,
+          "Outros Valores": it.totalIcms.valorOutros,
+          "Valor da NFe": it.totalIcms.valorTotalTributos,
         },
       ]);
 
       var itemsFiltered: any[] = [];
       if (prod) {
-        itemsFiltered = it.itens.filter(
-          (produto) => produto.codigoProduto == prod
+        itemsFiltered = it.items.filter(
+          (p) => p.produto.codigo == prod
         );
-      } else itemsFiltered = it.itens;
+      } else itemsFiltered = it.items;
 
       const itemList = itemsFiltered.map((item) => {
         return {
-          "Código do Item": item.codigoProduto,
-          Ean: item.ean,
-          "Descrição do Item": item.nomeProduto,
-          Ncm: item.ncm,
+          "Código do Item": item.produto.codigo,
+          Ean: item.produto.ean,
+          "Descrição do Item": item.produto.descricao,
+          Ncm: item.produto.ncm,
           CFOP: item.cfop,
           Unidade: item.unidade,
           Quantidade: item.quantidade,
@@ -302,12 +302,12 @@ export class ProdFormComponent implements OnInit {
           "Mod Base de Calculo": item.icms.modBaseCalculo,
           "Valor da Base de Calculo": item.icms.valorBaseCalculo,
           "Percentual do Icms": item.icms.percentualIcms,
-          "Valor do ICMS": item.icms.valorICMS,
+          "Valor do ICMS": item.icms.valor,
           "Mod da Base de Calculo de ST": item.icms.modBaseCalculoST,
-          "Percentual de Mva ST": item.icms.percentualMvaST,
+          "Percentual de Mva ST": item.icms.percentualMVAST,
           "Valor da Basede Calculo de ST": item.icms.valorBaseCalculoST,
-          "Percentual de Icms ST": item.icms.percentualIcmsST,
-          "Valor de Icms ST": item.icms.valorIcmsST,
+          "Percentual de Icms ST": item.icms.percentualST,
+          "Valor de Icms ST": item.icms.valorST,
 
           // Ipi
           "IPI CST": item.ipi.cst,

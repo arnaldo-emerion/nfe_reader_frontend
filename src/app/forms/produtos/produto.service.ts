@@ -16,11 +16,10 @@ export class ProdutoService {
   }
 
   getProdutosByNFeByNfeListAndProdList(
-    codProdList: any[],
-    nnfList: any[]
+    idList: any[]
   ): Observable<any> {
     return this.http.get(
-      API + `/produto/per-nfe-02?codProdList=${codProdList}&nnfList=${nnfList}`
+      API + `/api/v1/nfe/completa?idList=${idList}`
     );
   }
 
