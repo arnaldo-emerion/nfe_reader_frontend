@@ -63,7 +63,7 @@ export class ProdFormComponent implements OnInit {
     private location: Location,
     private prodService: ProdutoService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.construirFormulario();
@@ -106,7 +106,7 @@ export class ProdFormComponent implements OnInit {
     if (!$event) {
       return;
     }
-    if($event.tipoDocumento == "CUPOM_FISCAL") {
+    if ($event.tipoDocumento == "CUPOM_FISCAL") {
       console.log("Visualização ainda não implementada")
     } else {
       this.router.navigate(["nfe/" + $event.id]);
@@ -124,9 +124,9 @@ export class ProdFormComponent implements OnInit {
     }
   }
 
-  disponibilizarAtividade() {}
+  disponibilizarAtividade() { }
 
-  indisponibilizarAtividade() {}
+  indisponibilizarAtividade() { }
 
   private construirFormulario() {
     this.formulario = this.formBuilder.group({
@@ -175,11 +175,12 @@ export class ProdFormComponent implements OnInit {
   }
 
   filtarRegistros() {
+    debugger
     const startDate = DataUtils.dateCompToDateInicial(this.dataInicial);
     const endDate = DataUtils.dateCompToDateFinal(this.dataFinal);
 
     const dataFilter = this.filteredDataList.filter(
-      (item) => item.dhEmi >= startDate && item.dhEmi <= endDate
+      (item) => item.emissao >= startDate && item.emissao <= endDate
     );
 
     this.data$ = of(dataFilter);
@@ -200,7 +201,7 @@ export class ProdFormComponent implements OnInit {
   exportToExcelFunc(items) {
     const codPordList = [this.identifier];
     const nnfList = items.map((i) => i.id);
-    if(nnfList.length == 0) return
+    if (nnfList.length == 0) return
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
       .subscribe((data: any[]) => {
@@ -211,11 +212,22 @@ export class ProdFormComponent implements OnInit {
   exportToExcelFuncSpecific(items) {
     const codPordList = [this.identifier];
     const nnfList = items.map((i) => i.id);
-    if(nnfList.length == 0) return
+    if (nnfList.length == 0) return
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
       .subscribe((data: any[]) => {
         this.exportDataToExcel(data, codPordList)
+      });
+  }
+
+  exportAsOneTable(items) {
+    const codPordList = [this.identifier];
+    const nnfList = items.map((i) => i.id);
+    if (nnfList.length == 0) return
+    this.prodService
+      .getProdutosByNFeByNfeListAndProdList(nnfList)
+      .subscribe((data: any[]) => {
+        this.exportDataToExcelAsOne(data, codPordList)
       });
   }
 
@@ -331,6 +343,81 @@ export class ProdFormComponent implements OnInit {
       XLSX.utils.sheet_add_json(ws, itemList, { origin: "A5" });
       XLSX.utils.book_append_sheet(wb, ws, sheetName);
     });
+    XLSX.writeFile(
+      wb,
+      "dados-fiscais_" + moment().format("DD_MM_YYYY_HH_mm_ss") + ".xlsx"
+    );
+  }
+
+  exportDataToExcelAsOne(data: any[], prod?) {
+    var wb = XLSX.utils.book_new();
+    const items: any[] = [];
+    let { sheetName } = this.getFileName(prod);
+    var ws = XLSX.utils.json_to_sheet([]);
+
+    data.forEach((it) => {
+      var itemsFiltered: any[] = [];
+      if (prod) {
+        itemsFiltered = it.items.filter(
+          (p) => p.produto.codigo == prod
+        );
+      } else itemsFiltered = it.items;
+
+      const itemList = itemsFiltered.map((item) => {
+        return {
+          "Nota Fiscal": it.numeroNotaFiscal,
+          "Operacao": it.naturezaOPeracao,
+          "Destinatario": it.destinatario.cpfCnpj,
+          "UF Destino": it.destinatario.uf,
+          "Código do Item": item.produto.codigo,
+          Ean: item.produto.ean,
+          "Descrição do Item": item.produto.descricao,
+          Ncm: item.produto.ncm,
+          CFOP: item.cfop,
+          Unidade: item.unidade,
+          Quantidade: item.quantidade,
+          "Valor Unitario": item.valorUnitario,
+          "Valor Total": item.valorTotal,
+
+          // Icms
+          Origem: item.icms.origem,
+          CST: item.icms.cst,
+          "Mod Base de Calculo": item.icms.modBaseCalculo,
+          "Valor da Base de Calculo": item.icms.valorBaseCalculo,
+          "Percentual do Icms": item.icms.percentualIcms,
+          "Valor do ICMS": item.icms.valor,
+          "Mod da Base de Calculo de ST": item.icms.modBaseCalculoST,
+          "Percentual de Mva ST": item.icms.percentualMVAST,
+          "Valor da Basede Calculo de ST": item.icms.valorBaseCalculoST,
+          "Percentual de Icms ST": item.icms.percentualST,
+          "Valor de Icms ST": item.icms.valorST,
+
+          // Ipi
+          "IPI CST": item.ipi.cst,
+          "IPI Base de Calculo": item.ipi.baseCalculo,
+          "IPI Percentual": item.ipi.percentual,
+          "IPI Valor": item.ipi.valor,
+
+          // Pis
+          "PIS CST": item.pis.cst,
+          "PIS Base de Calculo": item.pis.baseCalculo,
+          "PIS Percentual": item.pis.percentual,
+          "PIS Valor": item.pis.valor,
+
+          // Cofins
+          "Cofins CST": item.cofins.cst,
+          "Cofins Base de Calculo": item.cofins.baseCalculo,
+          "Cofins Percentual": item.cofins.percentual,
+          "Cofins Valor": item.cofins.valor,
+        };
+      });
+
+      items.push(...itemList)
+
+    });
+
+    XLSX.utils.sheet_add_json(ws, items, { origin: "A5" });
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
     XLSX.writeFile(
       wb,
       "dados-fiscais_" + moment().format("DD_MM_YYYY_HH_mm_ss") + ".xlsx"
