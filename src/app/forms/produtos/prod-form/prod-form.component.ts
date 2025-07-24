@@ -229,7 +229,7 @@ export class ProdFormComponent implements OnInit {
   exportDataToExcel(data: any[], prod?) {
     var wb = XLSX.utils.book_new();
     data.forEach((it) => {
-      let { sheetName } = this.getFileName(it.nnf);
+      let { sheetName } = this.getFileName(it.numeroNotaFiscal);
       var ws = XLSX.utils.json_to_sheet([]);
       XLSX.utils.sheet_add_json(ws, [
         {
