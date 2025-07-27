@@ -46,13 +46,13 @@ export class ProdFormComponent implements OnInit {
     {
       head: "Preço de Venda nesta NFe",
       el: "valorUnitario",
-      format: { tipo: "PIPE", pipe: "currency", arguments: "BRL" },
+      format: { tipo: "PIPE", pipe: "decimal"},
     },
     { head: "Qtd", el: "quantidade" },
     {
       head: "Val Total",
       el: "valorTotal",
-      format: { tipo: "PIPE", pipe: "currency", arguments: "BRL" },
+      format: { tipo: "PIPE", pipe: "decimal"},
     },
   ];
 
@@ -109,7 +109,7 @@ export class ProdFormComponent implements OnInit {
     if ($event.tipoDocumento == "CUPOM_FISCAL") {
       console.log("Visualização ainda não implementada")
     } else {
-      this.router.navigate(["nfe/" + $event.id]);
+      this.router.navigate(["nfe/" + $event.seqNFe]);
     }
   }
 
@@ -175,7 +175,6 @@ export class ProdFormComponent implements OnInit {
   }
 
   filtarRegistros() {
-    debugger
     const startDate = DataUtils.dateCompToDateInicial(this.dataInicial);
     const endDate = DataUtils.dateCompToDateFinal(this.dataFinal);
 
@@ -200,7 +199,7 @@ export class ProdFormComponent implements OnInit {
 
   exportToExcelFunc(items) {
     const codPordList = [this.identifier];
-    const nnfList = items.map((i) => i.id);
+    const nnfList = items.map((i) => i.seqNFe);
     if (nnfList.length == 0) return
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
@@ -211,7 +210,7 @@ export class ProdFormComponent implements OnInit {
 
   exportToExcelFuncSpecific(items) {
     const codPordList = [this.identifier];
-    const nnfList = items.map((i) => i.id);
+    const nnfList = items.map((i) => i.seqNFe);
     if (nnfList.length == 0) return
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
@@ -222,7 +221,7 @@ export class ProdFormComponent implements OnInit {
 
   exportAsOneTable(items) {
     const codPordList = [this.identifier];
-    const nnfList = items.map((i) => i.id);
+    const nnfList = items.map((i) => i.seqNFe);
     if (nnfList.length == 0) return
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
@@ -323,19 +322,19 @@ export class ProdFormComponent implements OnInit {
 
           // Ipi
           "IPI CST": item.ipi.cst,
-          "IPI Base de Calculo": item.ipi.baseCalculo,
+          "IPI Base de Calculo": item.ipi.valorBaseCalculo,
           "IPI Percentual": item.ipi.percentual,
           "IPI Valor": item.ipi.valor,
 
           // Pis
           "PIS CST": item.pis.cst,
-          "PIS Base de Calculo": item.pis.baseCalculo,
+          "PIS Base de Calculo": item.pis.valorBaseCalculo,
           "PIS Percentual": item.pis.percentual,
           "PIS Valor": item.pis.valor,
 
           // Cofins
           "Cofins CST": item.cofins.cst,
-          "Cofins Base de Calculo": item.cofins.baseCalculo,
+          "Cofins Base de Calculo": item.cofins.valorBaseCalculo,
           "Cofins Percentual": item.cofins.percentual,
           "Cofins Valor": item.cofins.valor,
         };
@@ -384,7 +383,7 @@ export class ProdFormComponent implements OnInit {
           CST: item.icms.cst,
           "Mod Base de Calculo": item.icms.modBaseCalculo,
           "Valor da Base de Calculo": item.icms.valorBaseCalculo,
-          "Percentual do Icms": item.icms.percentualIcms,
+          "Percentual do Icms": item.icms.percentual,
           "Valor do ICMS": item.icms.valor,
           "Mod da Base de Calculo de ST": item.icms.modBaseCalculoST,
           "Percentual de Mva ST": item.icms.percentualMVAST,
@@ -394,19 +393,19 @@ export class ProdFormComponent implements OnInit {
 
           // Ipi
           "IPI CST": item.ipi.cst,
-          "IPI Base de Calculo": item.ipi.baseCalculo,
+          "IPI Base de Calculo": item.ipi.valorBaseCalculo,
           "IPI Percentual": item.ipi.percentual,
           "IPI Valor": item.ipi.valor,
 
           // Pis
           "PIS CST": item.pis.cst,
-          "PIS Base de Calculo": item.pis.baseCalculo,
+          "PIS Base de Calculo": item.pis.valorBaseCalculo,
           "PIS Percentual": item.pis.percentual,
           "PIS Valor": item.pis.valor,
 
           // Cofins
           "Cofins CST": item.cofins.cst,
-          "Cofins Base de Calculo": item.cofins.baseCalculo,
+          "Cofins Base de Calculo": item.cofins.valorBaseCalculo,
           "Cofins Percentual": item.cofins.percentual,
           "Cofins Valor": item.cofins.valor,
         };
