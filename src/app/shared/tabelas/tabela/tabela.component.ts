@@ -49,7 +49,9 @@ export class TabelaComponent
   cols = [];
   selectedRowIndex = -1;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer) {
+    this.datasource = new MatTableDataSource<any>([]);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.dados) {
@@ -67,7 +69,7 @@ export class TabelaComponent
   }
 
   inicializarTabela(data) {
-    this.datasource = new MatTableDataSource<any>(data);
+    this.datasource.data = data;
     this.datasource.paginator = this.paginator;
 
     this.cols = this.displayedColumns.map((el) => el.el);

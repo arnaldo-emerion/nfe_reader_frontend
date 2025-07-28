@@ -55,7 +55,7 @@ export class NfeListagemComponent implements OnInit {
     if($event.tipoDocumento == "CUPOM_FISCAL") {
       console.log("Visualização ainda não implementada")
     } else {
-      this.router.navigate(["nfe/" + $event.id]);
+      this.router.navigate(["nfe/" + $event.seqNFe]);
     }
   }
 
