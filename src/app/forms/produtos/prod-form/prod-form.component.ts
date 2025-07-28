@@ -284,7 +284,7 @@ export class ProdFormComponent implements OnInit {
           "Valor do Pis": it.totalIcms.valorPis,
           "Valor do Cofins": it.totalIcms.valorCofins,
           "Outros Valores": it.totalIcms.valorOutros,
-          "Valor da NFe": it.totalIcms.valorTotalTributos,
+          "Valor da NFe": it.totalIcms.valorNotaFiscal,
         },
       ]);
 
@@ -408,6 +408,9 @@ export class ProdFormComponent implements OnInit {
           "Cofins Base de Calculo": item.cofins.valorBaseCalculo,
           "Cofins Percentual": item.cofins.percentual,
           "Cofins Valor": item.cofins.valor,
+
+          // Totais
+          "Valor Total Produtos": it.totalIcms.valorProdutos
         };
       });
 
