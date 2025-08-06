@@ -226,7 +226,7 @@ export class ProdFormComponent implements OnInit {
     this.prodService
       .getProdutosByNFeByNfeListAndProdList(nnfList)
       .subscribe((data: any[]) => {
-        this.exportDataToExcelAsOne(data, codPordList)
+        this.exportDataToExcelAsOne(data)
       });
   }
 
@@ -366,8 +366,11 @@ export class ProdFormComponent implements OnInit {
         return {
           "Nota Fiscal": it.numeroNotaFiscal,
           "Operacao": it.naturezaOPeracao,
-          "Destinatario": it.destinatario.cpfCnpj,
-          "UF Destino": it.destinatario.uf,
+          "CNPJ Destinatario": it.destinatario.cpfCnpj,
+          "Razao Social Destinatario": it.destinatario.razaoSocial,
+          "UF Destinatario": it.destinatario.uf,
+          "CNPJ Emitente": it.emitente.cpfCnpj,
+          "Razao Social Emitente": it.emitente.razaoSocial,
           "Código do Item": item.produto.codigo,
           Ean: item.produto.ean,
           "Descrição do Item": item.produto.descricao,
