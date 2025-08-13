@@ -9,7 +9,7 @@ const API = environment.ApiUrl;
   providedIn: "root",
 })
 export class NFeService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getById(identificador): Observable<any> {
     return this.http.get(API + "/api/v1/nfe/" + identificador);
@@ -37,5 +37,11 @@ export class NFeService {
 
   getMonthlyEvolution(): Observable<any> {
     return this.http.get(API + "/api/v1/documento-fiscal/monthly-evolution");
+  }
+
+  getMonthlyEvolutionPorData(startDate, endDate): Observable<any> {
+    return this.http.get(
+      API + "/api/v1/documento-fiscal/monthly-evolution?startDate=" + startDate + "&endDate=" + endDate
+    );
   }
 }

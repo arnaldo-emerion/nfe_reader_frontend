@@ -6,6 +6,7 @@ import { DataUtils } from "app/utils/data-utils";
 import { Chart } from "chart.js";
 import * as moment from "moment";
 import { AnaliseService } from "../../analise.service";
+import { ChartUtils } from "app/utils/chart-utils";
 
 @Component({
   selector: "app-dist-vendas-analitico",
@@ -144,7 +145,7 @@ export class DistVendasAnaliticoComponent implements OnInit {
       },
     });
 
-    this.reloadChart();
+    ChartUtils.reloadChart(this.grafico);
   }
 
   openDialog(clientModel) {}
@@ -199,43 +200,6 @@ export class DistVendasAnaliticoComponent implements OnInit {
     dataInicial = null;
     dataFinal = null;
     this.loadChart();
-  }
-
-  toggleText = 'Desmarcar Todos';
-  reloadChart() {
-    const chart = this.grafico;
-
-    // Override legend after chart exists
-    chart.options.plugins.legend.labels.generateLabels = (chartInstance: any) => {
-      const original = Chart.overrides.pie.plugins.legend.labels.generateLabels(chartInstance);
-      return [
-        {
-          text: this.toggleText,
-          fillStyle: '#888',
-          strokeStyle: '#888',
-          hidden: false,
-          index: -1
-        },
-        ...original
-      ];
-    };
-
-    chart.options.plugins.legend.onClick = (e: any, legendItem: any, legend: any) => {
-      if (legendItem.index === -1) {
-        const allVisible = chart.getDatasetMeta(0).data.every((arc: any) => !arc.hidden);
-        chart.getDatasetMeta(0).data.forEach((arc: any) => {
-          arc.hidden = allVisible;
-        });
-        this.toggleText = allVisible ? 'Marcar Todos' : 'Desmarcar Todos';
-        chart.update();
-      } else {
-        const arc = chart.getDatasetMeta(0).data[legendItem.index];
-        arc.hidden = !arc.hidden;
-        chart.update();
-      }
-    };
-
-    chart.update();
   }
 
 }
