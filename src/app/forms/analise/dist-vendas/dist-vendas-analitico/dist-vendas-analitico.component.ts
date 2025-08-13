@@ -219,7 +219,7 @@ export class DistVendasAnaliticoComponent implements OnInit {
         ...original
       ];
     };
-debugger;
+
     chart.options.plugins.legend.onClick = (e: any, legendItem: any, legend: any) => {
       if (legendItem.index === -1) {
         const allVisible = chart.getDatasetMeta(0).data.every((arc: any) => !arc.hidden);

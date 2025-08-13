@@ -20,9 +20,7 @@ export class NFeService {
   }
 
   getCabecalhoFiltrado(dataInicial, dataFinal, estado): Observable<any> {
-    return this.http.get(
-      API + "/api/v1/documento-fiscal/cabecalho/" + dataInicial + "/" + dataFinal + "/" + estado
-    );
+    return this.http.get(API + "/api/v1/documento-fiscal/cabecalho/" + dataInicial + "/" + dataFinal + "/" + estado);
   }
 
   getByCnpj(cnpj): Observable<any> {
@@ -35,5 +33,9 @@ export class NFeService {
 
   getByCodProd(cProd): Observable<any> {
     return this.http.get(API + "/api/v1/nfe/cprod/" + cProd);
+  }
+
+  getMonthlyEvolution(): Observable<any> {
+    return this.http.get(API + "/api/v1/documento-fiscal/monthly-evolution");
   }
 }

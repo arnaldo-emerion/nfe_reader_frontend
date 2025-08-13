@@ -99,7 +99,15 @@ export const ROUTES: RouteInfo[] = [
     ],
     descricao: "",
   },
-
+  {
+    id: null,
+    path: "/analise/evolucao-mensal",
+    title: "Evolução Mensal",
+    icon: "person",
+    class: "",
+    subItems: [],
+    descricao: "Evolução Mensal de Clientes",
+  },
   {
     id: null,
     path: "/destinatario",

@@ -6,6 +6,7 @@ import { ConfiguracaoModule } from "./configuracao/configuracao.module";
 import { RelatorioErroModule } from "./relatorio-erro/relatorio-erro.module";
 import { TotalImpostoModule } from "./total-imposto/total-imposto.module";
 import { UsuarioModule } from "./usuario/usuario.module";
+import { EvolucaoMensalModule } from "./analise/evolucao-mensal/evolucao-mensal.module";
 
 @NgModule({
   declarations: [],
@@ -17,6 +18,7 @@ import { UsuarioModule } from "./usuario/usuario.module";
     ConfUserModule,
     RelatorioErroModule,
     HttpClientJsonpModule,
+    EvolucaoMensalModule
   ],
 })
 export class FormulariosModule {}

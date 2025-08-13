@@ -24,6 +24,7 @@ import { TotalImpostoComponent } from "./forms/total-imposto/total-imposto.compo
 import { UsuarioComponent } from "./forms/usuario/usuario.component";
 import { TranspListComponent } from "./forms/transportadora/transp-list/transp-list.component";
 import { ProdPerNfeComponent } from "./forms/produtos/prod-per-nfe/prod-per-nfe.component";
+import { EvolucaoMensalComponent } from "./forms/analise/evolucao-mensal/evolucao-mensal.component";
 
 const routes: Routes = [
   {
@@ -141,6 +142,12 @@ const routes: Routes = [
   {
     path: "transportadora",
     component: TranspListComponent,
+    canActivate: [AuthGuard],
+  },
+
+    {
+    path: "analise/evolucao-mensal",
+    component: EvolucaoMensalComponent,
     canActivate: [AuthGuard],
   },
 
