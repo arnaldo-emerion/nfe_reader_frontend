@@ -353,7 +353,8 @@ export class ProdFormComponent implements OnInit {
     const items: any[] = [];
     let { sheetName } = this.getFileName(prod);
     var ws = XLSX.utils.json_to_sheet([]);
-
+    let currentNFeNumber = ""
+    let firstOccurrence = false
     data.forEach((it) => {
       var itemsFiltered: any[] = [];
       if (prod) {
@@ -363,6 +364,13 @@ export class ProdFormComponent implements OnInit {
       } else itemsFiltered = it.items;
 
       const itemList = itemsFiltered.map((item) => {
+        if(it.numeroNotaFiscal == currentNFeNumber){
+          firstOccurrence = false
+        } else{
+          firstOccurrence = true
+        }
+        currentNFeNumber = it.numeroNotaFiscal
+
         return {
           "Nota Fiscal": it.numeroNotaFiscal,
           "Operacao": it.naturezaOPeracao,
@@ -413,7 +421,8 @@ export class ProdFormComponent implements OnInit {
           "Cofins Valor": item.cofins.valor,
 
           // Totais
-          "Valor Total Produtos": it.totalIcms.valorProdutos
+          "Valor Total Produtos": it.totalIcms.valorProdutos,
+          "Valor Nota Fiscal": this.getValorNotaFiscal(firstOccurrence, it.totalIcms.valorNotaFiscal) 
         };
       });
 
@@ -429,4 +438,9 @@ export class ProdFormComponent implements OnInit {
     );
   }
 
+  getValorNotaFiscal(firstOcurrence, valor){
+    if(firstOcurrence){
+      return valor
+    } else return ""
+  }
 }

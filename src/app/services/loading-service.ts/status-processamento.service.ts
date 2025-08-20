@@ -22,7 +22,6 @@ export class StatusProcessamentoService {
   public ativarWatcher(applyDelay) {
     this.applyDelay = applyDelay;
     console.log("Watcher ATIVADO");
-    console.log(this.usuarioService.getUserInfo().cognitoUserName);
     this.watcher = setInterval(() => {
       this.getRegistrosEmProcessamento(
         this.usuarioService.getUserInfo().cognitoUserName

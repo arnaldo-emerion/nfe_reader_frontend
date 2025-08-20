@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ESTADOS_ARRAY } from 'app/arrays/estados.arrays';
 import { NFeService } from 'app/forms/nfe/nfe.service';
 import { DataUtils } from 'app/utils/data-utils';
@@ -13,6 +13,10 @@ import * as moment from 'moment';
 export class EvolucaoMensalComponent implements OnInit {
   showHeader = true;
   grafico: any;
+  wholeData: any
+
+  @ViewChild("dataInicial") startDate;
+  @ViewChild("dataFinal") endDate;
 
   constructor(private service: NFeService) { }
 
@@ -23,6 +27,7 @@ export class EvolucaoMensalComponent implements OnInit {
   loadData(startDate?, endDate?) {
     this.service.getMonthlyEvolution()
       .subscribe((data: any[]) => {
+        this.wholeData = data
         this.loadChart(data);
       })
   }
@@ -37,6 +42,7 @@ export class EvolucaoMensalComponent implements OnInit {
 
     this.service.getMonthlyEvolutionPorData(dataInicial, dataFinal)
       .subscribe((data: any[]) => {
+        this.wholeData = data
         this.loadChart(data);
       })
   }
@@ -47,7 +53,11 @@ export class EvolucaoMensalComponent implements OnInit {
     let chartData = data.map((ufData, index) => ({
       label: ufData.uf,
       backgroundColor: this.getRandomColor(),
-      data: ufData.items.map((item) => item.total),
+      data: ufData.items.map((item) => {
+        if(this.checkedButton == "valorTotal"){
+          return item.total
+        } else return item.qtd
+      }),
       hidden: index >= 4
     }));
     this.montarGrafico(labels, chartData)
@@ -61,6 +71,12 @@ export class EvolucaoMensalComponent implements OnInit {
       "," +
       Math.floor(Math.random() * 255) +
       ")";
+  }
+
+  checkedButton = "valorTotal";
+  toggleTipoCurvaABC(item) {
+    this.checkedButton = item.value;
+    this.loadChart(this.wholeData)
   }
 
   montarGrafico(labels: any[], dataset) {

@@ -119,7 +119,6 @@ export class ConfUserComponent implements OnInit {
   }
 
   saveConfig() {
-    console.log("Selected CNPJ: " + this.selectedCNPJ)
     if (this.isConfActive) {
       this.parametrosNatOperacao.forEach((e) => {
         e.active = false;
