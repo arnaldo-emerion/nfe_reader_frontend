@@ -4,6 +4,7 @@ import { ESTADOS_ARRAY } from 'app/arrays/estados.arrays';
 import { NFeService } from 'app/forms/nfe/nfe.service';
 import { DataUtils } from 'app/utils/data-utils';
 import { log } from 'console';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-export-nfe-data',
@@ -34,7 +35,7 @@ export class ExportNfeDataComponent implements OnInit {
   constructor(private service: NFeService, private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit(): void {
-    //this.loadData()
+    this.data$ = of([])
     this.construirFormulario()
   }
 
