@@ -4,10 +4,11 @@ import { DirectivesModule } from "app/shared/directives/directives.module";
 import { AnaliseQualitativaModule } from "./analise-qualitativa/analise-qualitativa.module";
 import { DistVendasModule } from "./dist-vendas/dist-vendas.module";
 import { EvolucaoMensalModule } from "./evolucao-mensal/evolucao-mensal.module";
+import { ExportNfeDataModule } from "./export-nfe-data/export-nfe-data.module";
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, AnaliseQualitativaModule, DistVendasModule, EvolucaoMensalModule],
+  imports: [CommonModule, AnaliseQualitativaModule, DistVendasModule, EvolucaoMensalModule, ExportNfeDataModule],
   exports: [DistVendasModule],
 })
-export class AnaliseModule {}
+export class AnaliseModule { }

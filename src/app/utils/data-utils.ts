@@ -21,4 +21,18 @@ export class DataUtils {
 
     return dataFormatada;
   }
+
+  static formatStartMoment(date) {
+    return this.formatMoment(date, "1900-01-01")
+  }
+
+  static formatEndMoment(date) {
+    return this.formatMoment(date, "9999-12-30")
+  }
+
+  static formatMoment(date, defaultDate) {
+    if (date) {
+      return date.format("yyyy-MM-DD");
+    } else defaultDate
+  }
 }

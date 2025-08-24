@@ -110,6 +110,15 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     id: null,
+    path: "/export/nfe-data",
+    title: "Exportar NFe",
+    icon: "person",
+    class: "",
+    subItems: [],
+    descricao: "Exporte informações sobre as NFes",
+  },
+  {
+    id: null,
     path: "/destinatario",
     title: "Clientes",
     icon: "person",
@@ -187,7 +196,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private emitenteService: EmitenteService,
     private userService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);

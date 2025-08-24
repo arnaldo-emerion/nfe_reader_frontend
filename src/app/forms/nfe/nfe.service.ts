@@ -44,4 +44,8 @@ export class NFeService {
       API + "/api/v1/documento-fiscal/monthly-evolution?startDate=" + startDate + "&endDate=" + endDate
     );
   }
+
+  getDataToExport(parameters?): Observable<any> {
+    return this.http.get(API + "/api/v1/nfe/data-export?" + parameters);
+  }
 }

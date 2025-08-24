@@ -1,0 +1,112 @@
+<div class="main-content" style="min-height: 0px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="formPesquisa">
+            <div class="row" style="align-items: baseline">
+
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>Data Inicial</mat-label>
+                  <input matInput [matDatepicker]="dataInicial" formControlName="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="dataInicial"></mat-datepicker-toggle>
+                  <mat-datepicker #dataInicial>
+                    <mat-datepicker-actions>
+                      <button matDatepickerCancel class="btn btn-danger ml-1"
+                        (click)="formPesquisa.get('startDate')?.setValue(null)">Limpar</button>
+                      <button matDatepickerApply class="btn btn-success ml-1">Aplicar</button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>Data Final</mat-label>
+                  <input matInput [matDatepicker]="dataFinal" formControlName="endDate">
+                  <mat-datepicker-toggle matSuffix [for]="dataFinal"></mat-datepicker-toggle>
+                  <mat-datepicker #dataFinal>
+                    <mat-datepicker-actions>
+                      <button matDatepickerCancel class="btn btn-danger ml-1"
+                        (click)="formPesquisa.get('endDate')?.setValue(null)">Limpar</button>
+                      <button matDatepickerApply class="btn btn-success ml-1">Aplicar</button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="standard">
+                  <mat-label>UF</mat-label>
+                  <mat-select #estado formControlName="ufDest">
+                    <mat-option [value]="'TODOS'"> Todos </mat-option>
+                    <mat-option *ngFor="let estado of estados" [value]="estado.sigla">
+                      {{ estado.nome }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>CNPJ Destinatário</mat-label>
+                  <input matInput formControlName="cnpj">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 offset-md-2">
+                <button class="btn btn-success" (click)="applyFilters()">
+                  Aplicar Filtro
+                </button>
+              </div>
+            </div>
+
+            <div class="row" style="align-items: baseline">
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>Codigo</mat-label>
+                  <input matInput formControlName="codigo">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>EAN</mat-label>
+                  <input matInput formControlName="ean">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-label>NCM</mat-label>
+                  <input matInput formControlName="ncm">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field>
+                  <mat-label>Descrição</mat-label>
+                  <input matInput formControlName="descricao">
+                </mat-form-field>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-tabela
+  *ngIf="data$ | async as data"
+  [displayedColumns]="displayedColumns"
+  [dados]="data"
+  [showHeader]="false"
+  [headerTitle]="'Distribuição de Vendas'"
+  [showAddButtom]="false"
+  [marginTopClass]="'no-top-margin'">
+</app-tabela>

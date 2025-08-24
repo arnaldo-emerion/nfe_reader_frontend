@@ -25,6 +25,7 @@ import { UsuarioComponent } from "./forms/usuario/usuario.component";
 import { TranspListComponent } from "./forms/transportadora/transp-list/transp-list.component";
 import { ProdPerNfeComponent } from "./forms/produtos/prod-per-nfe/prod-per-nfe.component";
 import { EvolucaoMensalComponent } from "./forms/analise/evolucao-mensal/evolucao-mensal.component";
+import { ExportNfeDataComponent } from "./forms/analise/export-nfe-data/export-nfe-data.component";
 
 const routes: Routes = [
   {
@@ -145,9 +146,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
-    {
+  {
     path: "analise/evolucao-mensal",
     component: EvolucaoMensalComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: "export/nfe-data",
+    component: ExportNfeDataComponent,
     canActivate: [AuthGuard],
   },
 
@@ -166,4 +173,4 @@ const routes: Routes = [
   ],
   exports: [],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
