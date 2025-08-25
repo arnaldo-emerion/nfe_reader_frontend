@@ -102,6 +102,7 @@
 
 
 <app-tabela
+  #table
   *ngIf="data$ | async as data"
   [displayedColumns]="displayedColumns"
   [dados]="data"
@@ -109,4 +110,33 @@
   [headerTitle]="'Distribuição de Vendas'"
   [showAddButtom]="false"
   [marginTopClass]="'no-top-margin'">
+
+  <div slot="available-actions">
+  
+    <div slot="available-actions">
+      <div class="icone">
+        <img
+          [src]="'/assets/img/export_all_items.svg'"
+          alt="Exportar para Excel"
+          [title]="'Exportar APENAS o item: ' + identifier"
+          class="img-centered clickme"
+          (click)="
+            exportToExcelFuncSpecific(table.selection.selected)
+          "
+        />
+
+        <img
+          [src]="'/assets/img/export_all.svg'"
+          alt="Exportar para Excel"
+          [title]="'Exportar os itens numa unica tabela'"
+          class="img-centered clickme"
+          (click)="
+            exportAsOneTable(table.selection.selected)
+          "
+        />
+      </div>
+    </div>
+    
+  </div>
+                  
 </app-tabela>
